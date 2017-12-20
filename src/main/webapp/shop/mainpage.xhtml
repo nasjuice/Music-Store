@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<ui:composition
+    template="/WEB-INF/templates/masterTemplate.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <meta name="author" content="Pierre Azelart, Evan G"/>
+
+    <ui:define name="css">
+        <h:outputStylesheet name="mainpage.css" library="css"/>
+    </ui:define>
+
+    <ui:define name="WindowTitle">
+        ${msgs.homeLbl}
+    </ui:define>
+    <ui:define name="page-content"> 
+        <div class="page-content-wrapper">
+            <div id="carousel" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel" data-slide-to="1"></li>
+                    <li data-target="#carousel" data-slide-to="2"></li>
+                </ol>
+
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <h:link outcome="latest">
+                            <div class="carousel-caption">
+                                <h1>#{msgs.newReleases}</h1>
+                            </div>
+                        </h:link>
+                    </div>
+                    <div class="item">
+                        <h:link outcome="onsale">
+                            <div class="carousel-caption">
+                                <h1>#{msgs.onsale}</h1>
+                            </div>
+                        </h:link>
+                    </div>
+                    <div class="item">
+                        <h:link outcome="popular">
+                            <div class="carousel-caption">
+                                <h1>#{msgs.popular}</h1>
+                            </div>
+                        </h:link>
+                    </div>
+                </div>
+
+                <!--Carousel buttons-->
+                <a class="left carousel-control" href="#carousel" data-slide="prev">
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                </a>
+                <a class="right carousel-control" href="#carousel" data-slide="next">
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
+            </div>
+            <div id="mainpage-container" class="container" style="width: 100%;">
+                <div class="row">
+                    <h:form>
+                        <div class="col-md-6" style="margin:0;padding:0;">
+                            <div class="browse-wrapper">
+                                <h:commandLink action="#{browseChange.browseAlbums}" styleClass="browse-btn-link">
+                                    <div class="browse-item" id="browse-albums">
+                                        <div class="browse-caption">
+                                            <span id="browse-album-caption">#{msgs.albumLbl}</span>
+                                        </div>
+                                    </div>
+                                </h:commandLink>
+                            </div>
+                        </div>
+                    </h:form>
+                    <div class="col-md-6" style="margin:0;padding:0;">
+                        <h:form>
+                            <h:commandLink action="#{browseChange.browseArtists()}" styleClass="browse-btn-link">
+                                <div class="browse-item" id="browse-artists">
+                                    <div class="browse-caption">
+                                        <span id="browse-album-caption">#{msgs.artists}</span>
+                                    </div>
+                                </div>
+                            </h:commandLink>
+                        </h:form>
+                    </div>
+
+                </div>
+
+                <div class="row" style="text-align: center; padding-bottom: 5em;">
+                    <img src="#{request.contextPath}/resources/ads/#{bannerAdBacking.adPath}" style="width: 100vw; height: 17vh;"/>
+                </div>
+                <div>
+                    <h:panelGroup rendered="#{clientTracking.isTracking}">
+                        <div class="row">
+                            <div class="col-md-12 col-md-offset-1" style="padding-bottom: 5em;">
+                                <h2 style="color:white;">#{msgs.suggested}</h2>
+                            </div>
+                        </div>
+                        <div class="row" style="width: 90%; margin-left: 5%;">
+                            <ui:repeat value="#{clientTracking.trackClient()}" var="sugg">
+                                <!--<div class="col-md-2">
+                                <h:form>
+                                      <h:commandLink action="#{albumBacking.albumPage(sugg)}" styleClass="btn">
+                                          <figure class="figure card-wrapper">
+                                              <img src="#{request.contextPath}/resources/coverart/#{sugg.coverArtId.imagePath}" class="figure-img img-fluid" style="height:150px; width:150px;"/>
+                                              <div class="latest-caption">
+                                                  <h4>#{sugg.title}</h4>
+                                                  <h6>#{sugg.artistId.name}</h6>
+                                              </div>
+                                          </figure>
+                                      </h:commandLink>
+                                  </h:form>-->
+
+                                <div class="col-xs-18 col-sm-6 col-md-3 card-wrap">
+                                    <h:form>
+                                        <div class="thumbnail tmp">
+                                            <h:commandLink action="#{albumBacking.albumPage(sugg)}">
+                                                <img src="#{request.contextPath}/resources/coverart/#{sugg.coverArtId.imagePath}" class="img-cover"></img>
+                                            </h:commandLink>
+                                            <div class="caption">
+                                                <h:commandLink action="#{albumBacking.albumPage(sugg)}"><h4>#{sugg.title}</h4></h:commandLink>
+                                                <h:commandLink action="#{artistBacking.artistPage(al.artistId)}"><p id="artist-name">#{sugg.artistId.name}</p></h:commandLink>
+                                            </div>
+                                        </div>
+                                    </h:form>
+                                </div>
+                            </ui:repeat>
+                        </div>
+                    </h:panelGroup>
+                </div>
+                <hr/>
+                <div class="row" style="padding-bottom: 5em;">
+                    <div class="col-md-6">
+                        <div id="browse-survey">
+                            <ui:insert name="survey">
+                                <ui:include src="/WEB-INF/sections/survey.xhtml"/>
+                            </ui:insert>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="browse-rss">
+                            <ui:insert name="rss">
+                                <ui:include src="/WEB-INF/sections/rssFeed.xhtml"/>
+                            </ui:insert>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="text-align: center; padding-bottom: 5em;">
+                    <img src="#{request.contextPath}/resources/ads/#{bannerAdBacking.adPath}" style="width: 100vw; height: 17vh;"/>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>
+

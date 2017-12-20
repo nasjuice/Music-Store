@@ -1,0 +1,100 @@
+/* 
+    Created on : 1-Mar-2017, 5:56:52 PM
+    Author     : Evang
+*/
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+.album-info-wrapper{
+    height: 35vh;
+    margin-top: 5%;
+}
+.album{
+    margin: 0 auto;
+}
+
+#alb-header{
+    width: 100%;
+    float: left;
+}
+
+.alb-art{
+    margin-left: 20%;
+    float: left;
+    width: 30%;
+    
+}
+
+#table-row{
+    padding: 0;
+    width: 60%;
+    margin-left: 20%;
+}
+
+#info-track{
+    color: white;
+}
+
+a{
+    color: white;
+    font-family: sans-serif;
+    font-size: 18px;
+}
+
+a:hover{
+    color: #02b875;
+}
+
+
+.albumArt{		
+    width: fit-content;		
+    height: 100%;		
+}		
+.album-info{
+    margin-left:1%;
+    color: white;
+    float: left;
+    width: auto;
+}		
+.track_list{
+    width: 50%;
+    margin: 0px auto;
+    display: table;
+}		
+.bodyClass{		
+    padding-top:70px;
+    background-color: #17171b;		
+}
+
+table th, td{
+    font-size: 20px;
+}
+
+table.track_list {
+    display: table;
+    width: 100%;
+}
+table.track_list thead, table.track_list tbody {
+    float: left;
+    width: 100%;
+}
+table.track_list tbody {
+    overflow: auto;
+    height: 40vh;
+}
+table.track_list tr {
+    width: 100%;
+    display: table;
+    text-align: left;
+}
+table.track_list th, table.track_list td {
+    width: 45%;
+}
+
+#suggested-header{
+    font-family: "Poppins", sans-serif;
+    color: white;
+}
+
+#suggested-title{
+    font-family: "Poppins", sans-serif;
+    color: white;
+}

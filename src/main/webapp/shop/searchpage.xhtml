@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<ui:composition
+    template="/WEB-INF/templates/masterTemplate.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway"></link>
+
+    <ui:define name="Window title">Search results</ui:define>
+    <ui:define name="css">
+        <h:outputStylesheet name="search_page.css" library="css"/>
+    </ui:define>
+    <ui:define name="page-content">
+        <div class="container displaySearchResults">
+            <h2>#{Search.typeSearched}</h2>
+            <h:form>
+                <!--in case there are tracks in the list, else does not display anything -->
+                <div class="row">
+                    <ui:repeat value="#{Search.trackResultsList}" var="t">
+
+                        <div class="col-xs-18 col-sm-6 col-md-3 card-wrap">
+                            <div class="thumbnail">
+                                <h:commandLink action="#{albumBacking.albumPage(t.albumId)}"><img src="#{request.contextPath}/resources/coverart/#{t.coverArtId.imagePath}" class="img-cover"></img></h:commandLink>
+                                <div class="caption">
+                                    <h:commandLink action="#{trackBacking.trackPage(t)}"><h4>#{t.title}</h4></h:commandLink>
+                                    <h:commandLink action="#{albumBacking.albumPage(t.albumId)}"><h5>#{t.albumId.title}</h5></h:commandLink>
+                                    <h:commandLink action="#{artistBacking.artistPage(t.artistId)}"><p>#{t.artistId.name}</p></h:commandLink>
+                                </div>
+                            </div>
+                        </div>
+
+                    </ui:repeat>
+
+                </div>
+                <hr/>
+                <!-- ___________________________________________________________________ -->  
+                <!--in case there are albums in the list, else does not display anything -->
+                <div class="row">
+
+                    <ui:repeat value="#{Search.albumResultsList}" var="al">
+                        <div class="col-xs-18 col-sm-6 col-md-3 card-wrap">
+                            <div class="thumbnail">
+                                <h:commandLink action="#{albumBacking.albumPage(al)}">
+                                    <img src="#{request.contextPath}/resources/coverart/#{al.coverArtId.imagePath}" class="img-cover"></img>
+                                </h:commandLink>
+                                <div class="caption">
+                                    <h:commandLink action="#{albumBacking.albumPage(al)}"><h4>#{al.title}</h4></h:commandLink>
+                                    <h:commandLink action="#{artistBacking.artistPage(al.artistId)}"><p>#{al.artistId.name}</p></h:commandLink>
+                                </div>
+                            </div>
+                        </div>
+                    </ui:repeat>
+
+                </div>
+                <hr/>
+                <!-- __________________________________________________________________* -->     
+
+                <!--in case there are artists in the list, else does not display anything-->
+                <div class="row">
+                    <ui:repeat value="#{Search.artistResultsList}" var="ar">
+                        <div class="col-xs-18 col-sm-6 col-md-3 artist-name-wrap">
+                            <h:commandLink class="artist-name" action="#{artistBacking.artistPage(ar)}">#{ar.name}</h:commandLink>
+                        </div>
+                    </ui:repeat>
+
+                </div>
+            </h:form>
+
+            <h6>#{Search.notFound}</h6>
+        </div>
+
+    </ui:define>
+</ui:composition>
+

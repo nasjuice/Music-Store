@@ -1,0 +1,36 @@
+/* 
+    Created on : 18-Mar-2017, 10:57:05 PM
+    Author     : Erika Bourque
+*/
+.report-table {
+    table-layout: fixed;
+    word-wrap: break-word;
+}
+
+.glyphicon-chevron-right {
+    content: url(../resources/icons/arrow-right.png);
+    height: 100%;
+}
+
+.glyphicon-chevron-left {
+    content: url(../resources/icons/arrow-left.png);
+    height: 100%;
+}
+
+.cal {
+    vertical-align: top;
+}
+
+.labels {
+    text-align: right;
+    vertical-align: text-bottom;
+    padding-top: 2px;
+}
+
+/*
+
+.calendars-center {
+    margin: auto;
+    width: 50%;
+    
+}*/

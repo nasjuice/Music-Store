@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    template="/WEB-INF/templates/managerTemplate.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:b="http://bootsfaces.net/ui"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <meta name="author" content="Naasir Jusab" />
+    <ui:define name="WindowTitle">#{msgs.edit}</ui:define>
+
+    <ui:define name="page-content">
+        <h1><h:outputText value="#{msgs.edit}"/></h1>
+        <h:form>
+        <p:panelGrid columns="2">
+            <p:outputLabel value="#{msgs.title}" for="title" />
+            <p:inputText id="title" value="#{userBacking.user.title}" title="Title" required="true" requiredMessage="The Title field is required.">
+                <f:validateLength minimum="1" maximum="10"/>
+            </p:inputText>
+            <p:outputLabel value="#{msgs.lastNameHeader}" for="lastName" />
+            <p:inputText id="lastName" value="#{userBacking.user.lastName}" title="LastName" required="true" requiredMessage="The LastName field is required.">
+                <f:validateLength minimum="1" maximum="255" />
+            </p:inputText>
+            <p:outputLabel value="#{msgs.firstNameHeader}" for="firstName" />
+            <p:inputText id="firstName" value="#{userBacking.user.firstName}" title="FirstName" required="true" requiredMessage="The FirstName field is required.">
+                <f:validateLength minimum="1" maximum="255" />
+            </p:inputText>
+            <p:outputLabel value="#{msgs.companyHeader}" for="companyName" />
+            <p:inputText id="companyName" value="#{userBacking.user.companyName}" title="CompanyName" >
+                <f:validateLength maximum="255" />
+            </p:inputText>
+            <p:outputLabel value="#{msgs.streetHeader}" for="streetAddress" />
+            <p:inputText id="streetAddress" value="#{userBacking.user.streetAddress}" title="StreetAddress" required="true" requiredMessage="The StreetAddress field is required."/>
+            <p:outputLabel value="#{msgs.cityHeader}" for="city" />
+            <p:inputText id="city" value="#{userBacking.user.city}" title="City" required="true" requiredMessage="The City field is required."/>
+            <p:outputLabel value="#{msgs.countryHeader}" for="country" />
+            <p:inputText id="country" value="#{userBacking.user.country}" title="Country" required="true" requiredMessage="The Country field is required."/>
+            <p:outputLabel value="#{msgs.postalCodeHeader}" for="postalCode" />
+            <p:inputText id="postalCode" value="#{userBacking.user.postalCode}" title="PostalCode" required="true" requiredMessage="The PostalCode field is required.">
+                <!-- http://stackoverflow.com/questions/1146202/canadian-postal-code-validation -->
+                <f:validateRegex pattern="[ABCEGHJKLMNPRSTVXY][0-9][ABCEGHJKLMNPRSTVWXYZ] ?[0-9][ABCEGHJKLMNPRSTVWXYZ][0-9]"/>
+            </p:inputText>
+            <p:outputLabel value="#{msgs.homePhoneHeader}" for="homePhone" />
+            <p:inputText id="homePhone" value="#{userBacking.user.homePhone}" title="HomePhone" required="true" requiredMessage="The HomePhone field is required.">
+                <!-- http://stackoverflow.com/questions/16699007/regular-expression-to-match-standard-10-digit-phone-number -->
+                <f:validateRegex pattern="^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$"/>
+            </p:inputText>
+            <p:outputLabel value="#{msgs.cellPhoneHeader}" for="cellPhone" />
+            <p:inputText id="cellPhone" value="#{userBacking.user.cellPhone}" validator="#{phoneValidation.validate}" title="CellPhone"/>
+            <p:outputLabel value="#{msgs.emailHeader}" for="email" />
+            <p:inputText id="email" value="#{userBacking.user.email}" validator="#{emailValidation.validate}" title="Email" required="true" requiredMessage="The Email field is required."/>                
+            <p:outputLabel value="#{msgs.isManagerHeader}" for="isManager" />
+            <p:inputText id="isManager" value="#{userBacking.user.isManager}" title="IsManager" required="true" requiredMessage="The IsManager field is required.">
+                <f:validateLongRange minimum="0" maximum="1" />
+            </p:inputText>
+            <p:outputLabel value="#{msgs.provinceHeader}" for="provinceId" />
+            <p:selectOneMenu id="provinceId" value="#{userBacking.user.provinceId}" converter="#{provincePFConverter}" required="true" requiredMessage="The ProvinceId field is required.">
+                <f:selectItems value="#{provinceBacking.all}" var="province" itemLabel="#{province.name}" itemValue="#{province}"/>
+            </p:selectOneMenu>
+        </p:panelGrid>
+        <p:commandButton ajax="false" action="#{userBacking.edit()}" value="#{msgs.edit}"/>
+        <p:commandButton ajax="false" action="#{userBacking.back()}" value="#{msgs.back}" />
+        </h:form>
+        <p:outputPanel autoUpdate="true">
+            <p:dialog id="msgDialog" widgetVar="messageDialog" modal="true"
+                      visible="#{facesContext.validationFailed}">
+                <p:messages id="messagesInDialog" />
+            </p:dialog>
+        </p:outputPanel>
+    </ui:define>
+</ui:composition>

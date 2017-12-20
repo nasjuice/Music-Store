@@ -1,0 +1,50 @@
+<ui:composition
+    template="/WEB-INF/templates/masterTemplate.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <meta name="author" content="Pierre Azelart" />
+
+    <ui:define name="css">
+        <h:outputStylesheet name="help_page.css" library="css"/>
+    </ui:define>
+
+    <ui:define name="WindowTitle">
+        #{msgs.help}
+    </ui:define>
+    <ui:define name="page-content"> 
+        <div class="help-title">
+            <h1>#{msgs.helpTitle}</h1>
+        </div>
+        <div class="container content">
+            <div class="row subtitle-row"><h2>#{msgs.helpNavTitle}</h2></div>
+            <div class="pos-cont">
+                <div class="txt-content">
+                    #{msgs.helpNav}
+                </div>
+            </div>
+            
+            <div class="row subtitle-row"><h2>#{msgs.helpBrowseTitle}</h2></div>
+            <div class="pos-cont">
+                <div class="txt-content">
+                    #{msgs.helpBrowse}
+                </div>
+            </div>
+
+            <div class="row subtitle-row"><h2>#{msgs.helpBuyTitle}</h2></div>
+            <div class="pos-cont">
+                <div class="txt-content">
+                    #{msgs.helpBuy}                    
+                </div>
+            </div>
+            <div class="row subtitle-row"><h2>#{msgs.helpDownloadTitle}</h2></div>
+            <div class="pos-cont">
+                <div class="txt-content">
+                    #{msgs.helpDownload}
+                </div>
+            </div>
+        </div>
+        <hr/>
+    </ui:define>
+</ui:composition>
+

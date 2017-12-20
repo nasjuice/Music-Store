@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    template="/WEB-INF/templates/managerTemplate.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:b="http://bootsfaces.net/ui"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <meta name="author" content="Naasir Jusab" />
+
+    <ui:define name="WindowTitle">#{msgs.newsFeed}</ui:define>
+
+    <ui:define name="page-content">
+        <h:form>
+            <h1><h:outputText value="#{msgs.add}"/></h1>
+            <p:panelGrid columns="2">
+                <p:outputLabel value="#{msgs.url}" for="url" />
+                <p:inputText id="url" validator="#{rssFeedValidation.validate}" value="#{rssFeedBacking.newsFeed.url}" title="Url" required="true" requiredMessage="The Url field is required.">
+                    <f:validateLength minimum="1" maximum="255" />
+                </p:inputText>
+            </p:panelGrid>
+            <p:commandButton value="#{msgs.add}" action="#{rssFeedBacking.save()}" update=":rssFormID:rssTableID" />
+        </h:form>
+
+
+        <h:form id="rssFormID">
+            <h1><h:outputText value="#{msgs.newsFeed}"/></h1>
+            <p:dataTable value="#{rssFeedBacking.all}" id="rssTableID" var="item" paginator="true" rows="5">
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs.id}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.id}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs.url}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.url}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs.options}"/>
+                    </f:facet>
+                    <p:commandButton value="#{msgs.del}" action="#{rssFeedBacking.remove(item.id)}" update=":rssFormID:rssTableID"/>
+                    <p:commandButton value="#{msgs.select}" action="#{rssFeedBacking.select(item.id)}" update=":rssFormID:rssTableID"/>
+                </p:column>                   
+            </p:dataTable>
+        </h:form>
+        <p:outputPanel autoUpdate="true">
+            <p:dialog id="msgDialog" widgetVar="messageDialog" modal="true"
+                      visible="#{facesContext.validationFailed}">
+                <p:messages id="messagesInDialog" />
+            </p:dialog>
+        </p:outputPanel>
+    </ui:define>
+</ui:composition>

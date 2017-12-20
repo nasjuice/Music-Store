@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    template="/WEB-INF/templates/managerTemplate.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:b="http://bootsfaces.net/ui"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <meta name="author" content="Naasir Jusab" />
+    <ui:define name="WindowTitle">#{msgs.addTrack}</ui:define>
+
+    <ui:define name="page-content">
+        <h:form>
+            <h1><h:outputText value="#{msgs.addTrack}"/></h1>
+            <p:panelGrid columns="2">
+                <p:outputLabel value="#{msgs.title}" for="title" />
+                <p:inputText id="title" value="#{trackBacking.track.title}" title="Title" required="true" requiredMessage="The Title field is required.">
+                    <f:validateLength minimum="1" maximum="255" />
+                </p:inputText>  
+                <p:outputLabel value="#{msgs.releaseDate}" for="releaseDate" />
+                <p:inputText id="releaseDate" validator="#{dateValidation.validate}" value="#{trackBacking.track.releaseDate}" title="ReleaseDate" required="true" requiredMessage="The ReleaseDate field is required.">
+                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                </p:inputText>
+                <p:outputLabel value="#{msgs.playLength}" for="playLength" />
+                <p:inputText id="playLength" validator="#{playLengthValidation.validate}" value="#{trackBacking.track.playLength}" title="PlayLength" required="true" requiredMessage="The PlayLength field is required."/>
+                <p:outputLabel value="#{msgs.dateEntered}" for="dateEntered" />
+                <p:inputText id="dateEntered" validator="#{dateValidation.validate}" value="#{trackBacking.track.dateEntered}" title="DateEntered" required="true" requiredMessage="The DateEntered field is required.">
+                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                </p:inputText>
+                <p:outputLabel value="#{msgs.partOfAlbum}" for="partOfAlbum" />
+                <p:inputText id="partOfAlbum" value="#{trackBacking.track.partOfAlbum}" title="PartOfAlbum" required="true" requiredMessage="The PartOfAlbum field is required.">
+                    <f:validateLongRange minimum="0" maximum="1" />
+                </p:inputText>
+                <p:outputLabel value="#{msgs.albumTrackNumber}" for="albumTrackNumber" />
+                <p:inputText id="albumTrackNumber" validator="#{numberValidation.validate}" value="#{trackBacking.track.albumTrackNumber}" title="AlbumTrackNumber" required="true" requiredMessage="The AlbumTrackNumber field is required."/>
+                <p:outputLabel value="#{msgs.costPrice}" for="costPrice" />
+                <p:inputText id="costPrice" validator="#{pricesValidation.validate}" value="#{trackBacking.track.costPrice}" title="CostPrice" required="true" requiredMessage="The CostPrice field is required."/>
+                <p:outputLabel value="#{msgs.listPrice}" for="listPrice" />
+                <p:inputText id="listPrice" validator="#{pricesValidation.validate}" value="#{trackBacking.track.listPrice}" title="ListPrice" required="true" requiredMessage="The ListPrice field is required."/>
+                <p:outputLabel value="#{msgs.salePrice}" for="salePriceTrack" />
+                <p:inputText id="salePriceTrack" validator="#{salePriceValidation.validate}" value="#{trackBacking.track.salePrice}" title="SalePrice" required="true" requiredMessage="The SalePrice field is required."/>
+                <p:outputLabel value="#{msgs.removalStatus}" for="removalStatus" />
+                <p:inputText id="removalStatus" value="#{trackBacking.track.removalStatus}" title="RemovalStatus" required="true" requiredMessage="The RemovalStatus field is required.">
+                    <f:validateLongRange minimum="0" maximum="1" />
+                </p:inputText>
+                <p:outputLabel value="#{msgs.removalDate}" for="removalDate" />
+                <p:inputText id="removalDate" validator="#{removalDateValidation.validate}" value="#{trackBacking.track.removalDate}" title="RemovalDate" >
+                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                </p:inputText>
+                <p:outputLabel value="#{msgs.albumTitle}" for="albumId" />
+                <p:selectOneMenu id="albumId" value="#{trackBacking.track.albumId}" converter="#{albumConverter}" required="true" requiredMessage="The AlbumId field is required.">
+                    <f:selectItems value="#{albumBacking.all}" var="album" itemLabel="#{album.title}" itemValue="#{album}"/>
+                </p:selectOneMenu>
+                <p:outputLabel value="#{msgs.artistName}" for="artistId" />
+                <p:selectOneMenu id="artistId" value="#{trackBacking.track.artistId}" converter="#{artistConverter}" required="true" requiredMessage="The ArtistId field is required.">
+                    <f:selectItems value="#{artistBacking.all}" var="artist" itemLabel="#{artist.name}" itemValue="#{artist}"/>
+                </p:selectOneMenu>
+                <p:outputLabel value="#{msgs.songwriterName}" for="songwriterId" />
+                <p:selectOneMenu id="songwriterId" value="#{trackBacking.track.songwriterId}" converter="#{songwriterConverter}" required="true" requiredMessage="The SongwriterId field is required.">
+                    <f:selectItems value="#{songWriterBacking.all}" var="songwriter" itemLabel="#{songwriter.name}" itemValue="#{songwriter}"/>
+                </p:selectOneMenu>
+                <p:outputLabel value="#{msgs.genreName}" for="genreId" />
+                <p:selectOneMenu id="genreId" value="#{trackBacking.track.genreId}" converter="#{genreConverter}" required="true" requiredMessage="The GenreId field is required.">
+                    <f:selectItems value="#{genreBacking.all}" var="genre" itemLabel="#{genre.name}" itemValue="#{genre}"/>
+                </p:selectOneMenu>
+                <p:outputLabel value="#{msgs.artPath}" for="coverArtId" />
+                <p:selectOneMenu id="coverArtId" value="#{trackBacking.track.coverArtId}" converter="#{coverArtConverter}" required="true" requiredMessage="The CoverArtId field is required.">
+                    <f:selectItems value="#{coverArtBacking.all}" var="coverArt" itemLabel="#{coverArt.imagePath}" itemValue="#{coverArt}"/>
+                </p:selectOneMenu>
+            </p:panelGrid>
+            <p:commandButton id="createTrackBtn" ajax="false" action="#{trackBacking.create()}" value="#{msgs.addTrack}"/>
+        </h:form>
+        <p:outputPanel autoUpdate="true">
+            <p:dialog id="msgDialog" widgetVar="messageDialog" modal="true"
+                      visible="#{facesContext.validationFailed}">
+                <p:messages id="messagesInDialog" />
+            </p:dialog>
+        </p:outputPanel>
+    </ui:define>
+</ui:composition>

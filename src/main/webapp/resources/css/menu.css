@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+.custom-nav{
+    height: 70px;
+    z-index: 999;
+}
+
+.cart-items{
+    padding-left: 10px;
+    display: inline;
+}
+
+#type-nav{
+    width: 12em;
+}
+
+#type-dropdown{
+    float: right;
+}
+
+.nd{
+    top: 0;
+    width: 100%;
+    position: fixed;
+    background-color: #17171b;
+    border: none;
+    border-radius: 0px;
+    margin-bottom: 0;
+}
+
+.nd .navbar-collapse, .nd .navbar-form {
+    background-color: #17171b;
+    border: none;
+}
+
+.cart-link{
+    padding: 0;
+    margin-right: 10px;
+    margin-left: 15px;
+    color: rgba(255, 255, 255, .87);
+}
+
+.cart-link:hover{
+    color: #02b875;
+}
+
+.nd .nn > li > a{
+    color: rgba(255,255,255, 0.87);
+    font-size: 18px;
+
+}
+
+.nd .nb{
+    font-size: 22px;
+    color: rgba(255,255,255, 0.87);
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+}
+
+.nd .nb:hover{
+    color: #fff;
+    transition: ease-in-out 0.3s;
+}
+
+.container-fluid{
+    margin-top: 10px;
+}
+
+.sb{
+    color: rgba(255,255,255, 0.87);
+    padding: 0px;
+    margin: 6px 12px;
+    border: none;
+}
+
+.sb:hover{
+    color: #02b875;
+    transition: ease-in-out 0.2s; 
+}
+
+.nd .nn > li > a:hover{
+    color: #02b875;
+    transition: ease-in-out 0.2s;
+}
+
+.sc{
+    color: rgba(255,255,255, 0.87);
+    margin-right: 1%;
+}
+.sc:hover{
+    color: #02b875;
+    transition: ease-in-out 0.2s;
+}
+
+.fg{
+    margin-top: 2px;
+    border: none;
+    border-radius: 0px;
+}
+
+.fc{
+    height:24px;
+    border-radius: 20px;
+    border-width: 1.5px;
+    border-color: #fff;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+
+}
+
+.searchInput{
+    padding: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 0;
+    
+}
+
+.fc:focus{
+    border-color: #02b875;
+    transition: ease-in-out 0.2s;
+    outline: none;
+}
+
+.sc{
+    color: rgba(255,255,255, 0.87);
+}
+
+.nb img{
+    float:left;
+    display: inline-block;
+    height: 100%;
+}
+
+.dropdown, a{
+    font-size: 14px;
+}
+
+img{
+    margin-right: 15px;
+}
+
+.nd .nn > .open > a, .nd .nn > .open, .nd .nn > .open > a:focus {
+    color: #17171b;
+    background-color: #e7e7e7;
+}
+
+.nd .nn > li > a:focus {
+    color: rgba(255,255,255, 0.87);
+}
+
+.dropdown-menu{
+    background-color: #17171b;
+    border: 2px solid rgba(255, 255, 255, 0.87);
+}
+
+.dropdown-menu > li > a{
+    color: rgba(255, 255, 255, 0.87);
+}

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    template="/WEB-INF/templates/managerTemplate.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:b="http://bootsfaces.net/ui"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <meta name="author" content="Erika Bourque" />
+    <ui:define name="WindowTitle">#{msgs.manReportSalesByTrack}</ui:define>
+
+    <ui:define name="page-content">
+        <h:outputStylesheet name="reports.css" library="css"/>
+        <h1><h:outputText value="#{msgs.manReportSalesByTrack}"/></h1>
+        <div align="center">
+            <h:form id="calendars" styleClass="calendar-center">
+                <h:panelGrid columns="2" style="vertical-align: top;" rowClasses="title, cal, labels">
+                    <p:outputLabel style="text-align: center; width: 100%;"><h4>#{msgs.reportStart}</h4></p:outputLabel>
+                    <p:outputLabel style="text-align: center; width: 100%;"><h4>#{msgs.reportEnd}</h4></p:outputLabel><p:calendar 
+                        id="reportStartDate" 
+                        mode="inline" 
+                        navigator="true" 
+                        maxdate="#{reportData.defaultEndDate}"
+                        value="#{reportData.startDate}">
+                    </p:calendar>
+                    <p:calendar 
+                        id="reportEndDate" 
+                        mode="inline" 
+                        navigator="true" 
+                        maxdate="#{reportData.defaultEndDate}"
+                        value="#{reportData.endDate}">
+                    </p:calendar>
+
+                    <p:outputLabel for="trackId" style="text-align: right;">#{msgs.trackIdLbl}</p:outputLabel>
+                    <p:inputText id="trackId" value="#{reportData.track}" converter="#{trackConverter}">
+                    </p:inputText>
+                </h:panelGrid>
+                <p:commandButton id="search" update="totalTable reportTable" value="#{msgs.searchBtn}" />
+            </h:form>
+        </div>
+        <br/>
+        <p:dataTable styleClass="report-table" 
+                     id="totalTable" 
+                     value="#{reports.getSalesByTrackTotals(reportData.startDate, reportData.endDate, reportData.track)}" 
+                     var="total">
+            <f:facet name="header">
+                #{msgs.totalSumHeader}
+            </f:facet>
+            <p:column>
+                <f:facet name="header">#{msgs.finalPriceHeader}</f:facet>
+                <h:outputText value="#{total[0]}">                    
+                    <f:convertNumber type="currency" />
+                </h:outputText>
+            </p:column>
+            <p:column>
+                <f:facet name="header">#{msgs.costPriceHeader}</f:facet>
+                <h:outputText value="#{total[1]}">                    
+                    <f:convertNumber type="currency" />
+                </h:outputText>
+            </p:column>
+            <p:column>
+                <f:facet name="header">#{msgs.profitHeader}</f:facet>
+                <h:outputText value="#{total[2]}">                    
+                    <f:convertNumber type="currency" />
+                </h:outputText>
+            </p:column>
+        </p:dataTable>
+        <br/>
+        <p:dataTable styleClass="report-table" 
+                     id="reportTable" 
+                     value="#{reports.getSalesByTrack(reportData.startDate, reportData.endDate, reportData.track)}" 
+                     var="invoice">
+            <f:facet name="header">
+                #{msgs.detailHeader}
+            </f:facet>
+            <p:column>
+                <f:facet name="header">#{msgs.saleDateHeader}</f:facet>
+                <h:outputText value="#{invoice[0].saleDate}">
+                    <f:convertDateTime pattern="MMMM dd yyyy" />
+                </h:outputText>
+            </p:column>
+            <p:column>
+                <f:facet name="header">#{msgs.finalPriceHeader}</f:facet>
+                <h:outputText value="#{invoice[1]}">                    
+                    <f:convertNumber type="currency" />
+                </h:outputText>
+            </p:column>
+            <p:column>
+                <f:facet name="header">#{msgs.costPriceHeader}</f:facet>
+                <h:outputText value="#{invoice[2]}">                    
+                    <f:convertNumber type="currency" />
+                </h:outputText>
+            </p:column>
+            <p:column>
+                <f:facet name="header">#{msgs.profitHeader}</f:facet>
+                <h:outputText value="#{invoice[3]}">                    
+                    <f:convertNumber type="currency" />
+                </h:outputText>
+            </p:column>
+            <p:column>
+                <f:facet name="header">#{msgs.invoiceNumHeader}</f:facet>
+                    #{invoice[0].id}
+            </p:column>
+            <p:column>
+                <f:facet name="header">#{msgs.userNumHeader}</f:facet>
+                    #{invoice[0].userId.id}
+            </p:column>
+        </p:dataTable>
+    </ui:define>
+</ui:composition>

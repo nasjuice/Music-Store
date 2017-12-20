@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:b="http://bootsfaces.net/ui"
+    xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <meta name="author" content="Naasir Jusab" />
+    <h:form>
+        <b:navBar brand="PandaMedia" brandHref="#{request.contextPath}/manager/manager_index.xhtml">
+            <b:navbarLinks pull="right">
+                <b:navCommandLink value="#{msgs.inventory}" action="manindex" />
+                <b:navCommandLink value="#{msgs.sales}" action="mansales" />
+                <b:navCommandLink value="#{msgs.clients}" action="manclients" />
+                <b:navCommandLink value="#{msgs.orders}" action="manorders" />
+                <b:navCommandLink value="#{msgs.reviews}" action="manreviews" />
+                <b:dropMenu value="#{msgs.reports}">
+                    <b:navCommandLink value="#{msgs.manReportTotalSalesTitle}" action="reptotal" />
+                    <b:navCommandLink value="#{msgs.manReportTopSellersTitle}" action="reptopsellers" />
+                    <b:navCommandLink value="#{msgs.manReportTopClientsTitle}" action="reptopclients" />
+                    <b:navCommandLink value="#{msgs.manReportSalesByTrack}" action="reptrack" />
+                    <b:navCommandLink value="#{msgs.manReportSalesByAlbum}" action="repalbum" />
+                    <b:navCommandLink value="#{msgs.manReportSalesByArtist}" action="repartist" />
+                    <b:navCommandLink value="#{msgs.manReportSalesByClientTitle}" action="repclient" />
+                    <b:navCommandLink value="#{msgs.manReportZeroTrackTitle}" action="repzerotracks" />
+                    <b:navCommandLink value="#{msgs.manReportZeroUserTitle}" action="repzeroclients" />
+                </b:dropMenu>
+                <b:navCommandLink value="#{msgs.newsFeed}" action="mannewsfeeds" />
+                <b:navCommandLink value="#{msgs.survey}" action="mansurveys" />
+                <b:navCommandLink value="#{msgs.banner}" action="manbanners" />
+                <b:dropMenu value="#{msgs.selectLanguage}">
+                    <b:navCommandLink value="#{msgs.englishLanguage}" action="#{ChangeLanguage.englishAction()}" />
+                    <b:navCommandLink value="#{msgs.frenchLanguage}" action="#{ChangeLanguage.frenchAction()}" />
+                </b:dropMenu>
+                <b:dropMenu value="#{userAction.currUser.firstName}">
+                    <b:navCommandLink value="#{msgs.logout}" action="#{userAction.logout()}"/>
+                </b:dropMenu>
+            </b:navbarLinks>
+        </b:navBar>
+    </h:form>
+</ui:composition>

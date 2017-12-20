@@ -1,0 +1,33 @@
+<ui:composition template="/WEB-INF/templates/browseTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:jsf="http://xmlns.jcp.org/jsf">
+    <ui:define name="WindowTitle">
+        ${msgs.browseArtists} | Pandamedia
+    </ui:define>
+    <ui:define name="css">
+        <h:outputStylesheet name="browseartists.css" library="css"/>
+    </ui:define>
+    <ui:define name="browse-content">
+        <div class="container browse-cont">
+            <div class="row browse">
+
+                <h:form>
+                    <ui:repeat value="#{artistBacking.artistsList}" var="ar">
+                        <div class="col-xs-18 col-sm-6 col-md-3">
+
+                            <h:commandLink action="#{artistBacking.artistPage(ar)}">
+                                <div class="latest-caption">
+                                    <h5 class="artist-name">#{ar.name}</h5>
+                                </div>
+                            </h:commandLink>
+                        </div>                
+                    </ui:repeat>
+                </h:form>
+            </div>
+        </div>
+    </ui:define>
+
+</ui:composition>

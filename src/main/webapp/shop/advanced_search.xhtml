@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/WEB-INF/templates/masterTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="WindowTitle">
+        Search | Pandamedia
+    </ui:define>
+    <ui:define name="css">
+        <h:outputStylesheet name="advanced_search.css" library="css"/>
+        <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome-jsf.css" />
+    </ui:define>
+    <ui:define name="page-content">
+        <h:form id="formDates">
+            <div class="container search-form">
+                <div class="row title">
+                    <h4>#{msgs.advancedLabel}</h4>
+                </div>
+                <div class="row input">
+                    <div class="col-md-6">
+                        <p:inputMask id="date1" value="#{Search.paramDate1}" required="true" placeholder="mm/dd/yyyy" mask="99/99/9999"/>
+                        <h:message for="date1" style="color:red" />
+                    </div>
+                    <div class="col-md-6">
+                        <p:inputMask id="date2" value="#{Search.paramDate2}" required="true" placeholder="mm/dd/yyyy" mask="99/99/9999"/>
+                        <h:message for="date2" style="color:red" />
+                    </div>
+                </div>
+                <div class="row submit-button">
+                    <h:commandButton action="#{Search.executeSearch()}" value="Submit"/>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,33 @@
+body{
+    padding-top: 70px;
+}
+
+.help-title h1{
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    color: rgba(0, 0, 0, .87);
+    padding: 50px;
+    margin: 0;
+}
+
+.content{
+    padding: 20px;
+}
+
+.subtitle-row h2{
+    font-size: 20px;
+    font-weight: 700;
+    color: rgba(0, 0, 0, .87);
+    padding-left: 1.5em;
+}
+
+.pos-cont{
+    padding: 2em;
+    padding-right: 40%;
+    padding-left: 4em;
+}
+
+.txt-content{
+    font-size: 14px;
+    line-height: 150%;
+}

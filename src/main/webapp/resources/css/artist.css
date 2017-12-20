@@ -1,0 +1,21 @@
+.artist-header{
+    padding-top: 120px;
+    padding-left: 50px;
+}
+
+.pos-name h4{
+    font-family: "Poppins";
+    font-size: 24px!important;
+    font-weight: 700!important;
+}
+
+.pre-text{
+    font-size: 18px;
+}
+
+.artists{
+    margin: 0;
+    padding: 0;
+    padding-top: 50px;
+    padding-left: 50px;
+}

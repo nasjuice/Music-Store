@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    template="/WEB-INF/templates/managerTemplate.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:b="http://bootsfaces.net/ui"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <meta name="author" content="Naasir Jusab" />
+
+    <ui:define name="WindowTitle">#{msgs.sales}</ui:define>
+
+    <ui:define name="page-content">
+        <h:form id="albumFormID">
+            <h1><h:outputText value="#{msgs.albums}"/></h1>
+            <p:dataTable value="#{albumBacking.all}" id="albumTable" widgetVar="albumTable" filteredValue="#{albumBacking.filteredAlbums}"  var="item" paginator="true" rows="5">
+                <f:facet name="header">
+                    <p:outputPanel>
+                        <h:outputText value="#{msgs.search}" />
+                        <p:inputText id="globalFilter" onkeyup="PF('albumTable').filter()" style="width:150px" placeholder="#{msgs.keyword}"/>
+                    </p:outputPanel>
+                </f:facet>
+                <p:column filterBy="#{item.id}" headerText="#{msgs.id}" filterMatchMode="contains">
+                    <h:outputText value="#{item.id}"/>
+                </p:column>
+                <p:column filterBy="#{item.title}" headerText="#{msgs.title}" filterMatchMode="contains">
+                    <h:outputText value="#{item.title}"/>
+                </p:column>
+                <p:column filterBy="#{item.releaseDate}" headerText="#{msgs.releaseDate}" filterMatchMode="contains">
+                    <h:outputText value="#{item.releaseDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column filterBy="#{item.numTracks}" headerText="#{msgs.numTracks}" filterMatchMode="contains">
+                    <h:outputText value="#{item.numTracks}"/>
+                </p:column>
+                <p:column filterBy="#{item.dateEntered}" headerText="#{msgs.dateEntered}" filterMatchMode="contains">
+                    <h:outputText value="#{item.dateEntered}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column filterBy="#{item.costPrice}" headerText="#{msgs.costPrice}" filterMatchMode="contains">
+                    <h:outputText value="#{item.costPrice}"/>
+                </p:column>
+                <p:column filterBy="#{item.listPrice}" headerText="#{msgs.listPrice}" filterMatchMode="contains">
+                    <h:outputText value="#{item.listPrice}"/>
+                </p:column>
+                <p:column filterBy="#{item.salePrice}" headerText="#{msgs.salePrice}" filterMatchMode="contains">
+                    <h:outputText value="#{item.salePrice}"/>
+                </p:column>
+                <p:column filterBy="#{item.removalStatus}" headerText="#{msgs.removalStatus}" filterMatchMode="contains">
+                    <h:outputText value="#{item.removalStatus}"/>
+                </p:column>
+                <p:column filterBy="#{item.removalDate}" headerText="#{msgs.removalDate}" filterMatchMode="contains">
+                    <h:outputText value="#{item.removalDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column filterBy="#{item.artistId.name}" headerText="#{msgs.artistName}" filterMatchMode="contains">
+                    <h:outputText value="#{item.artistId.name}"/>
+                </p:column>
+                <p:column filterBy="#{item.genreId.name}" headerText="#{msgs.genreName}" filterMatchMode="contains">
+                    <h:outputText value="#{item.genreId.name}"/>
+                </p:column>
+                <p:column filterBy="#{item.recordingLabelId.name}" headerText="#{msgs.recLabelName}" filterMatchMode="contains">
+                    <h:outputText value="#{item.recordingLabelId.name}"/>
+                </p:column>
+                <p:column filterBy="#{item.coverArtId.imagePath}" headerText="#{msgs.artPath}" filterMatchMode="contains">
+                    <h:outputText value="#{item.coverArtId.imagePath}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs.options}"/>
+                    </f:facet>
+                    <p:commandButton  value="#{msgs.edit}" action="#{albumBacking.loadEditForSales(item.id)}" update=":albumFormID:albumTable"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+        <h:form id="trackFormID">
+            <h1><h:outputText value="#{msgs.tracks}"/></h1>
+            <p:dataTable value="#{trackBacking.all}" id="trackTableID" widgetVar="trackTable" filteredValue="#{trackBacking.filteredTracks}" var="item" paginator="true" rows="5">
+                <f:facet name="header">
+                    <p:outputPanel>
+                        <h:outputText value="#{msgs.search}" />
+                        <p:inputText id="globalFilter" onkeyup="PF('trackTable').filter()" style="width:150px" placeholder="#{msgs.keyword}"/>
+                    </p:outputPanel>
+                </f:facet>
+                <p:column filterBy="#{item.id}" headerText="#{msgs.id}" filterMatchMode="contains">
+                    <h:outputText value="#{item.id}"/>
+                </p:column>
+                <p:column filterBy="#{item.title}" headerText="#{msgs.title}" filterMatchMode="contains">
+                    <h:outputText value="#{item.title}"/>
+                </p:column>
+                <p:column filterBy="#{item.releaseDate}" headerText="#{msgs.releaseDate}" filterMatchMode="contains">
+                    <h:outputText value="#{item.releaseDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column filterBy="#{item.playLength}" headerText="#{msgs.playLength}" filterMatchMode="contains">
+                    <h:outputText value="#{item.playLength}"/>
+                </p:column>
+                <p:column filterBy="#{item.albumTrackNumber}" headerText="#{msgs.albumTrackNumber}" filterMatchMode="contains">
+                    <h:outputText value="#{item.albumTrackNumber}"/>
+                </p:column>
+                <p:column filterBy="#{item.dateEntered}" headerText="#{msgs.dateEntered}" filterMatchMode="contains">
+                    <h:outputText value="#{item.dateEntered}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column filterBy="#{item.partOfAlbum}" headerText="#{msgs.partOfAlbum}" filterMatchMode="contains">
+                    <h:outputText value="#{item.partOfAlbum}"/>
+                </p:column>
+                <p:column filterBy="#{item.costPrice}" headerText="#{msgs.costPrice}" filterMatchMode="contains">
+                    <h:outputText value="#{item.costPrice}"/>
+                </p:column>
+                <p:column filterBy="#{item.listPrice}" headerText="#{msgs.listPrice}" filterMatchMode="contains">
+                    <h:outputText value="#{item.listPrice}"/>
+                </p:column>
+                <p:column filterBy="#{item.salePrice}" headerText="#{msgs.salePrice}" filterMatchMode="contains">
+                    <h:outputText value="#{item.salePrice}"/>
+                </p:column>
+                <p:column filterBy="#{item.removalStatus}" headerText="#{msgs.removalStatus}" filterMatchMode="contains">
+                    <h:outputText value="#{item.removalStatus}"/>
+                </p:column>
+                <p:column filterBy="#{item.removalDate}" headerText="#{msgs.removalDate}" filterMatchMode="contains">
+                    <h:outputText value="#{item.removalDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column filterBy="#{item.albumId.title}" headerText="#{msgs.albumTitle}" filterMatchMode="contains">
+                    <h:outputText value="#{item.albumId.title}"/>
+                </p:column>
+                <p:column filterBy="#{item.artistId.name}" headerText="#{msgs.artistName}" filterMatchMode="contains">
+                    <h:outputText value="#{item.artistId.name}"/>
+                </p:column>
+                <p:column filterBy="#{item.songwriterId.name}" headerText="#{msgs.songwriterName}" filterMatchMode="contains">
+                    <h:outputText value="#{item.songwriterId.name}"/>
+                </p:column>
+                <p:column filterBy="#{item.genreId.name}" headerText="#{msgs.genreName}" filterMatchMode="contains">
+                    <h:outputText value="#{item.genreId.name}"/>
+                </p:column>
+                <p:column filterBy="#{item.coverArtId.imagePath}" headerText="#{msgs.artPath}" filterMatchMode="contains">
+                    <h:outputText value="#{item.coverArtId.imagePath}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs.options}"/>
+                    </f:facet>
+                    <p:commandButton  value="#{msgs.edit}" action="#{trackBacking.loadEditForSales(item.id)}" update=":trackFormID:trackTableID" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>

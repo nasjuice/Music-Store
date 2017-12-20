@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    template="/WEB-INF/templates/managerTemplate.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:b="http://bootsfaces.net/ui"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <meta name="author" content="Naasir Jusab" />
+
+    <ui:define name="WindowTitle">#{msgs.survey}</ui:define>
+
+    <ui:define name="page-content">
+        <h:form>
+            <h1><h:outputText value="#{msgs.add}"/></h1>
+            <p:panelGrid columns="2">
+                <p:outputLabel value="#{msgs.question}" for="question" />
+                <p:inputText id="question" value="#{managerSurveyBean.survey.question}" title="Question" required="true" requiredMessage="The Question field is required.">
+                    <f:validateLength minimum="1" maximum="255" />
+                </p:inputText>
+                <p:outputLabel value="#{msgs.answerA}" for="answerA" />
+                <p:inputText id="answerA" value="#{managerSurveyBean.survey.answerA}" title="AnswerA" required="true" requiredMessage="The AnswerA field is required.">
+                    <f:validateLength minimum="1" maximum="255" />
+                </p:inputText>
+                <p:outputLabel value="#{msgs.answerB}" for="answerB" />
+                <p:inputText id="answerB" value="#{managerSurveyBean.survey.answerB}" title="AnswerB" required="true" requiredMessage="The AnswerB field is required.">
+                    <f:validateLength minimum="1" maximum="255" />
+                </p:inputText>
+                <p:outputLabel value="#{msgs.answerC}" for="answerC" />
+                <p:inputText id="answerC" value="#{managerSurveyBean.survey.answerC}" title="AnswerC" required="true" requiredMessage="The AnswerC field is required.">
+                    <f:validateLength minimum="1" maximum="255" />
+                </p:inputText>
+                <p:outputLabel value="#{msgs.answerD}" for="answerD" />
+                <p:inputText id="answerD" value="#{managerSurveyBean.survey.answerD}" title="AnswerD" required="true" requiredMessage="The AnswerD field is required.">
+                    <f:validateLength minimum="1" maximum="255" />
+                </p:inputText>
+                <p:outputLabel value="#{msgs.votesA}" for="votesA" />
+                <p:inputText id="votesA" value="#{managerSurveyBean.survey.votesA}" title="VotesA" required="true" requiredMessage="The VotesA field is required.">
+                    <f:validateLongRange minimum="0" maximum="2147483647" />
+                </p:inputText>
+                <p:outputLabel value="#{msgs.votesB}" for="votesB" />
+                <p:inputText id="votesB" value="#{managerSurveyBean.survey.votesB}" title="VotesB" required="true" requiredMessage="The VotesB field is required.">
+                    <f:validateLongRange minimum="0" maximum="2147483647" />
+                </p:inputText>
+                <p:outputLabel value="#{msgs.votesC}" for="votesC" />
+                <p:inputText id="votesC" value="#{managerSurveyBean.survey.votesC}" title="VotesC" required="true" requiredMessage="The VotesC field is required.">
+                    <f:validateLongRange minimum="0" maximum="2147483647" />
+                </p:inputText>
+                <p:outputLabel value="#{msgs.votesD}" for="votesD" />
+                <p:inputText id="votesD" value="#{managerSurveyBean.survey.votesD}" title="VotesD" required="true" requiredMessage="The VotesD field is required.">
+                    <f:validateLongRange minimum="0" maximum="2147483647" />
+                </p:inputText>
+            </p:panelGrid>
+            <p:commandButton value="#{msgs.add}" action="#{managerSurveyBean.save()}" update=":surveyFormID:surveyTableID" />
+        </h:form>
+
+        <h:form id="surveyFormID">
+            <h1><h:outputText value="#{msgs.survey}"/></h1>
+            <p:dataTable value="#{managerSurveyBean.all}" id="surveyTableID" var="item" paginator="true" rows="5">
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs.id}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.id}">
+                    </h:outputText>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs.question}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.question}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs.answerA}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.answerA}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs.answerB}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.answerB}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs.answerC}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.answerC}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs.answerD}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.answerD}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs.votesA}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.votesA}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs.votesB}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.votesB}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs.votesC}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.votesC}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs.votesD}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.votesD}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs.options}"/>
+                    </f:facet>
+                    <p:commandButton  value="#{msgs.del}" action="#{managerSurveyBean.remove(item.id)}" update=":surveyFormID:surveyTableID"/>
+                    <p:commandButton value="#{msgs.select}" action="#{managerSurveyBean.select(item.id)}" update=":surveyFormID:surveyTableID"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+        <p:outputPanel autoUpdate="true">
+            <p:dialog id="msgDialog" widgetVar="messageDialog" modal="true"
+                      visible="#{facesContext.validationFailed}">
+                <p:messages id="messagesInDialog" />
+            </p:dialog>
+        </p:outputPanel>
+    </ui:define>
+</ui:composition>

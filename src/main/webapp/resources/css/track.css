@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+body{
+    
+    background-color:  white;
+}
+
+#album-info{
+    padding-top: 150px;
+    background-color: #17171b;
+    width: 100%;
+    color: white;
+    padding-bottom: 4%;
+}
+
+.track-info-wrapper{
+    padding-left: 20%;
+}
+
+#comment-section{
+    background-color: white;
+    padding: 0;
+    width: 100%;
+    padding-top: 3em;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+#info-track{
+    width: fit-content;
+}
+
+.user-id{
+    color: black;
+    font-weight: bold;
+}
+
+#artist-link{
+    float: left;
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: white;
+    width: fit-content;
+}
+
+#add-to-cart{
+    padding-top: 200px;
+    float: left;
+}
+
+#artist-link:hover{
+    color: #02b875;
+}
+
+.review-wrapper{
+    height: 40vh;
+    background-color: lime;
+}
+
+.review-content{
+    font-size: 16px;
+    color:#5e5e5e;
+}
+.modalPseudoClass{
+    color:black;
+}
+.comment {
+    overflow: hidden;
+    padding: 0 0 1em;
+    border-bottom: 1px solid #ddd;
+    margin: 0 0 1em;
+    *zoom: 1;
+}
+
+.text{
+    font-size: 16px;
+}
+
+.comment-img {
+    float: left;
+    margin-right: 33px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.comment-img img {
+    display: block;
+}
+
+.comment-body {
+    overflow: hidden;
+}
+
+.comment .text {
+    padding: 10px;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    background: #fff;
+}
+
+.comment .text p:last-child {
+    margin: 0;
+}
+
+.comment .attribution {
+    margin: 0.5em 0 0;
+    font-size: 14px;
+    color: #666;
+}
+
+/* special thanks to Gargiya from stackover flow for the stars CSS
+http://stackoverflow.com/questions/8118266/integrating-css-star-rating-into-an-html-form */
+.rating {
+    float:left;
+    width:300px;
+}
+.rating td { float:right; position:relative; }
+.rating td input {
+    position:absolute;
+    top:0px;
+    left:0px;
+    opacity:0;
+}
+.rating td label {
+    display:inline-block;
+    width:30px;
+    height:30px;
+    text-align:center;
+    font-size:30px;
+    margin-right:2px;
+    line-height:30px;
+    color: #858789;
+}
+.rating td:hover ~ td label,
+.rating td:hover label,
+.rating td.checked label,
+.rating td.checked ~ td label {
+    color:gold;
+}

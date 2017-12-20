@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    template="/WEB-INF/templates/managerTemplate.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:b="http://bootsfaces.net/ui"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <meta name="author" content="Naasir Jusab" />
+
+    <ui:define name="WindowTitle">#{msgs.reviews}</ui:define>
+
+    <ui:define name="page-content">
+        <h:form id="reviewFormID">
+            <h1><h:outputText value="#{msgs.reviews}"/></h1>
+            <p:dataTable value="#{reviewBacking.reviews}" id="reviewTableID" widgetVar="reviewTable" filteredValue="#{reviewBacking.filteredReviews}" var="item" paginator="true" rows="5">
+                <f:facet name="header">
+                    <p:outputPanel>
+                        <h:outputText value="#{msgs.search}" />
+                        <p:inputText id="globalFilter" onkeyup="PF('reviewTable').filter()" style="width:150px" placeholder="#{msgs.keyword}"/>
+                    </p:outputPanel>
+                </f:facet>
+                <p:column filterBy="#{item.id}" headerText="#{msgs.id}" filterMatchMode="contains">
+                    <h:outputText value="#{item.id}"/>
+                </p:column>
+                <p:column filterBy="#{item.dateEntered}" headerText="#{msgs.dateEntered}" filterMatchMode="contains">
+                    <h:outputText value="#{item.dateEntered}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column filterBy="#{item.rating}" headerText="#{msgs.rating}" filterMatchMode="contains">
+                    <h:outputText value="#{item.rating}"/>
+                </p:column>
+                <p:column filterBy="#{item.reviewContent}" headerText="#{msgs.reviewContent}" filterMatchMode="contains">
+                    <h:outputText value="#{item.reviewContent}"/>
+                </p:column>
+                <p:column id="approvalStatusID" filterBy="#{item.approvalStatus}" headerText="#{msgs.approvalStatus}" filterMatchMode="contains">
+                    <h:outputText id="approvalStatusText" value="#{item.approvalStatus}"/>
+                </p:column>
+                <p:column filterBy="#{item.trackId.title}" headerText="#{msgs.title}" filterMatchMode="contains">
+                    <h:outputText value="#{item.trackId.title}"/>
+                </p:column>
+                <p:column filterBy="#{item.userId.firstName}" headerText="#{msgs.name}" filterMatchMode="contains">
+                    <h:outputText value="#{item.userId.firstName}"/>
+                    <br/>
+                    <h:outputText value="#{item.userId.lastName}"/>
+                </p:column>
+                <p:column id="options">
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs.options}"/>
+                    </f:facet>
+                    <p:commandButton ajax="false" id="approveBtn" value="#{msgs.approve}" action="#{reviewBacking.approve(item.id)}"/>
+                    <p:commandButton ajax="false" id="disapproveBtn" value="#{msgs.disapprove}" action="#{reviewBacking.disapprove(item.id)}"/>
+                    <p:commandButton ajax="false" id="deleteBtn" value="#{msgs.del}" action="#{reviewBacking.removeItem(item.id)}"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>

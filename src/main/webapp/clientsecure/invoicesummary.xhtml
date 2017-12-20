@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/WEB-INF/templates/masterTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:p="http://primefaces.org/ui">
+    <meta name="author" content="Erika Bourque"/>
+    <ui:define name="WindowTitle">#{msgs.invoiceSummaryTitle}</ui:define>
+    <ui:define name="css">
+        <h:outputStylesheet name="checkout.css" library="css"/>
+    </ui:define>
+    <ui:define name="page-content">
+        <div class="container">
+        <div id="content">
+            <ui:fragment rendered="#{not invoiceSum.invoiceExists()}">
+                <h1>#{msgs.noInvoiceMsg}</h1>
+            </ui:fragment>
+            <ui:fragment rendered="#{invoiceSum.invoiceExists()}">
+                <div id="invoiceDetails">
+                    <h3>#{msgs.invoiceSummaryTitle}</h3>
+                    <b:panelGrid columnClasses="labels, output" columns="2">
+                        <h:outputLabel value="#{msgs.invoiceNumHeader}"/>
+                        <h:outputLabel value="#{invoiceSum.invoice.id}"/>
+
+                        <h:outputLabel value="#{msgs.saleDateHeader}"/>
+                        <h:outputLabel value="#{invoiceSum.invoice.saleDate}"/>
+
+                        <h:outputLabel value="#{msgs.subtotalHeader}"/>
+                        <h:outputLabel value="#{invoiceSum.invoice.totalGrossValue}">
+                            <f:convertNumber type="currency" />
+                        </h:outputLabel>
+
+                        <h:outputLabel value="#{msgs.gstLbl}"/>
+                        <h:outputLabel value="#{invoiceSum.invoice.gstTax}">
+                            <f:convertNumber type="currency" />
+                        </h:outputLabel>
+
+                        <h:outputLabel value="#{msgs.pstLbl}"/>
+                        <h:outputLabel value="#{invoiceSum.invoice.pstTax}">
+                            <f:convertNumber type="currency" />
+                        </h:outputLabel>
+
+                        <h:outputLabel value="#{msgs.hstLbl}"/>
+                        <h:outputLabel value="#{invoiceSum.invoice.hstTax}">
+                            <f:convertNumber type="currency" />
+                        </h:outputLabel>
+
+                        <h:outputLabel value="#{msgs.totalHeader}"/>
+                        <h:outputLabel value="#{invoiceSum.invoice.totalNetValue}">
+                            <f:convertNumber type="currency" />
+                        </h:outputLabel>
+                    </b:panelGrid>
+                </div>
+                <div id="billingInfo">
+                    <h3>#{msgs.billingTitle}</h3>
+                    <b:panelGrid columns="1">
+                        <h:outputLabel>#{userAction.currUser.title} #{userAction.currUser.firstName} #{userAction.currUser.lastName}</h:outputLabel>                    
+                        <h:outputLabel>#{userAction.currUser.streetAddress}</h:outputLabel>
+                        <h:outputLabel>#{userAction.currUser.city}, #{userAction.currUser.provinceId.name} #{userAction.currUser.postalCode}</h:outputLabel>
+                        <h:outputLabel>#{userAction.currUser.country}</h:outputLabel>
+                        <h:outputLabel>#{userAction.currUser.homePhone} #{userAction.currUser.cellPhone}</h:outputLabel>                  
+                    </b:panelGrid>               
+                </div>
+                <div id="invoicePurchases">
+                    <b:panelGrid columns="1" rendered="#{not invoiceSum.invoice.invoiceTrackList.isEmpty()}">
+                    <h3>#{msgs.trackLbl}</h3>
+                    <b:dataTable searching="false" paginated="false" var="invoicetrack" value="#{invoiceSum.invoice.invoiceTrackList}" >
+                        <f:facet name="header">#{msgs.trackLbl}</f:facet>
+                        <b:column>
+                            <f:facet name="header">#{msgs.titleHeader}</f:facet>
+                                #{invoicetrack.track.title}
+                        </b:column>
+                        <b:column>
+                            <f:facet name="header">#{msgs.artistHeader}</f:facet>
+                                #{invoicetrack.track.artistId.name}
+                        </b:column>
+                        <b:column>
+                            <f:facet name="header">#{msgs.priceHeader}</f:facet>
+                            <h:outputText value="#{invoicetrack.finalPrice}">
+                                <f:convertNumber type="currency" />
+                            </h:outputText>
+                        </b:column>
+                    </b:dataTable>
+                    </b:panelGrid>
+                    <b:panelGrid columns="1" rendered="#{not invoiceSum.invoice.invoiceAlbumList.isEmpty()}">
+                        <h3>#{msgs.albumLbl}</h3>
+                        <b:dataTable searching="false" paginated="false" value="#{invoiceSum.invoice.invoiceAlbumList}" var="invoicealbum">
+                            <f:facet name="header">#{msgs.albumLbl}</f:facet>
+                            <b:column>
+                                <f:facet name="header">#{msgs.titleHeader}</f:facet>
+                                    #{invoicealbum.album.title}
+                            </b:column>
+                            <b:column>
+                                <f:facet name="header">#{msgs.artistHeader}</f:facet>
+                                    #{invoicealbum.album.artistId.name}
+                            </b:column>
+                            <b:column>
+                                <f:facet name="header">#{msgs.priceHeader}</f:facet>
+                                <h:outputText value="#{invoicealbum.finalPrice}">
+                                    <f:convertNumber type="currency" />
+                                </h:outputText>
+                            </b:column>                      
+                        </b:dataTable>
+                    </b:panelGrid>
+                </div>
+            </ui:fragment>
+        </div>
+        </div>
+    </ui:define>
+</ui:composition>

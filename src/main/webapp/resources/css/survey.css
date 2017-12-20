@@ -1,0 +1,39 @@
+/* 
+    Author     : Hau Gilles Che
+*/
+
+#survey{
+    font-family: "Poppins", sans-serif;
+    color:white;
+}
+
+.ui-widget{
+    background: #17171b;
+    font-family: "Poppins", sans-serif;
+    color:white;
+    max-width:100%;
+}
+
+.ui-outputlabel{
+    background: #17171b;
+    font-family: "Poppins", sans-serif;
+    color:white;
+}
+
+.ui-progressbar{
+    max-width:100%;
+}
+.ui-widget-content{
+    background: #17171b;
+    border:0;
+}
+
+/*
+.ui-progressbar-value, .ui-progressbar-label{
+    color:white;
+}
+*/
+
+.ui-widget-content{
+    background:#17171b;
+}

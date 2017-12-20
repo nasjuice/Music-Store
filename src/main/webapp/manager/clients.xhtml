@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    template="/WEB-INF/templates/managerTemplate.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:b="http://bootsfaces.net/ui"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <meta name="author" content="Naasir Jusab" />
+
+    <ui:define name="WindowTitle">#{msgs.clients}</ui:define>
+
+    <ui:define name="page-content">
+        <h:form id="userFormID">
+            <h1><h:outputText value="#{msgs.clients}"/></h1>
+            <p:dataTable value="#{userBacking.all}" id="userTableID" widgetVar="userTable" filteredValue="#{userBacking.filteredUsers}"  var="item" paginator="true" rows="5">
+                <f:facet name="header">
+                    <p:outputPanel>
+                        <h:outputText value="#{msgs.search}" />
+                        <p:inputText id="globalFilter" onkeyup="PF('userTable').filter()" style="width:150px" placeholder="#{msgs.keyword}"/>
+                    </p:outputPanel>
+                </f:facet>
+                <p:column filterBy="#{item.id}" headerText="#{msgs.id}" filterMatchMode="contains">
+                    <h:outputText value="#{item.id}"/>
+                </p:column>
+                <p:column filterBy="#{item.title}" headerText="#{msgs.title}" filterMatchMode="contains">
+                    <h:outputText value="#{item.title}"/>
+                </p:column>
+                <p:column filterBy="#{item.lastName}" headerText="#{msgs.lastNameHeader}" filterMatchMode="contains">
+                    <h:outputText value="#{item.lastName}"/>
+                </p:column>
+                <p:column filterBy="#{item.firstName}" headerText="#{msgs.firstNameHeader}" filterMatchMode="contains">
+                    <h:outputText value="#{item.firstName}"/>
+                </p:column>
+                <p:column filterBy="#{item.companyName}" headerText="#{msgs.companyHeader}" filterMatchMode="contains">
+                    <h:outputText value="#{item.companyName}"/>
+                </p:column>
+                <p:column filterBy="#{item.streetAddress}" headerText="#{msgs.streetHeader}" filterMatchMode="contains">
+                    <h:outputText value="#{item.streetAddress}"/>
+                </p:column>
+                <p:column filterBy="#{item.city}" headerText="#{msgs.cityHeader}" filterMatchMode="contains">
+                    <h:outputText value="#{item.city}"/>
+                </p:column>
+                <p:column filterBy="#{item.country}" headerText="#{msgs.countryHeader}" filterMatchMode="contains">
+                    <h:outputText value="#{item.country}"/>
+                </p:column>
+                <p:column filterBy="#{item.postalCode}" headerText="#{msgs.postalCodeHeader}" filterMatchMode="contains">
+                    <h:outputText value="#{item.postalCode}"/>
+                </p:column>
+                <p:column filterBy="#{item.homePhone}" headerText="#{msgs.homePhoneHeader}" filterMatchMode="contains">
+                    <h:outputText value="#{item.homePhone}"/>
+                </p:column>
+                <p:column filterBy="#{item.cellPhone}" headerText="#{msgs.cellPhoneHeader}" filterMatchMode="contains">
+                    <h:outputText value="#{item.cellPhone}"/>
+                </p:column>
+                <p:column filterBy="#{item.email}" headerText="#{msgs.emailHeader}" filterMatchMode="contains">
+                    <h:outputText value="#{item.email}"/>
+                </p:column>
+                <p:column filterBy="#{item.isManager}" headerText="#{msgs.isManagerHeader}" filterMatchMode="contains">
+                    <h:outputText value="#{item.isManager}"/>
+                </p:column>
+                <p:column filterBy="#{item.provinceId.name}" headerText="#{msgs.provinceHeader}" filterMatchMode="contains">
+                    <h:outputText value="#{item.provinceId.name}"/>
+                </p:column>
+                <p:column filterBy="#{item.lastGenreSearched.name}" headerText="#{msgs.lastGenreHeader}" filterMatchMode="contains">
+                    <h:outputText value="#{item.lastGenreSearched.name}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs.totalPurchasesHeader}"/>
+                    </f:facet>
+                    <h:outputText value="#{userBacking.getClientTotalPurchase(item.id)}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs.options}"/>
+                    </f:facet>
+                    <p:commandButton  value="#{msgs.edit}" action="#{userBacking.loadEditForClients(item.id)}" update=":userFormID:userTableID" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>

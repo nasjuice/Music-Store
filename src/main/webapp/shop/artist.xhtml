@@ -1,0 +1,44 @@
+<ui:composition template="/WEB-INF/templates/masterTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui">
+    <ui:define name="WindowTitle">
+        #{artistBacking.artist.name} | Pandamedia
+    </ui:define>
+    <ui:define name="css">
+        <h:outputStylesheet name="artist.css" library="css"/>
+        <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome-jsf.css" />
+    </ui:define>
+    <ui:define name="page-content">
+        <div class="artist-header">
+            <div class="pos-name">
+                <span class="pre-text">Albums by <h4>#{artistBacking.artist.name}</h4></span>
+            </div>
+        </div>
+        <div class="container artists">
+            <h:form>
+                <!--in case there are tracks in the list, else does not display anything -->
+                <div class="row">
+                    <ui:repeat value="#{albumBacking.albumsFromArtist(artistBacking.artist)}" var="al">
+
+                        <div class="col-xs-18 col-sm-6 col-md-3">
+                            <div class="thumbnail">
+                                <h:commandLink action="#{albumBacking.albumPage(al)}">
+                                    <img src="../resources/coverart/#{al.coverArtId.imagePath}"></img>
+                                </h:commandLink>
+                                <div class="caption">
+                                    <h:commandLink action="#{albumBacking.albumPage(al)}"><h4>#{al.title}</h4></h:commandLink>
+                                    <p>#{al.artistId.name}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </ui:repeat>
+                </div>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>

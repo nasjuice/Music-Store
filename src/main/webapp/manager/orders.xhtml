@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    template="/WEB-INF/templates/managerTemplate.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:b="http://bootsfaces.net/ui"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <meta name="author" content="Naasir Jusab" />
+
+    <ui:define name="WindowTitle">#{msgs.orders}</ui:define>
+
+    <ui:define name="page-content">
+        <h:form id="invoiceFormID">
+            <h1><h:outputText value="#{msgs.orders}"/></h1>
+            <p:dataTable value="#{invoiceBacking.all}" id="invoiceTableID" widgetVar="invoiceTable" filteredValue="#{invoiceBacking.filteredInvoices}"  var="item" paginator="true" rows="5">
+                <f:facet name="header">
+                    <p:outputPanel>
+                        <h:outputText value="#{msgs.search}" />
+                        <p:inputText id="globalFilter" onkeyup="PF('invoiceTable').filter()" style="width:150px" placeholder="#{msgs.keyword}"/>
+                    </p:outputPanel>
+                </f:facet>
+                <p:column filterBy="#{item.id}" headerText="#{msgs.id}" filterMatchMode="contains">
+                    <h:outputText value="#{item.id}"/>
+                </p:column>
+                <p:column filterBy="#{item.saleDate}" headerText="#{msgs.saleDate}" filterMatchMode="contains">
+                    <h:outputText value="#{item.saleDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column filterBy="#{item.totalNetValue}" headerText="#{msgs.totalNetValue}" filterMatchMode="contains">
+                    <h:outputText value="#{item.totalNetValue}"/>
+                </p:column>
+                <p:column filterBy="#{item.pstTax}" headerText="#{msgs.pstTax}" filterMatchMode="contains">
+                    <h:outputText value="#{item.pstTax}"/>
+                </p:column>
+                <p:column filterBy="#{item.gstTax}" headerText="#{msgs.gstTax}" filterMatchMode="contains">
+                    <h:outputText value="#{item.gstTax}"/>
+                </p:column>
+                <p:column filterBy="#{item.hstTax}" headerText="#{msgs.hstTax}" filterMatchMode="contains">
+                    <h:outputText value="#{item.hstTax}"/>
+                </p:column>
+                <p:column filterBy="#{item.totalGrossValue}" headerText="#{msgs.totalGrossValue}" filterMatchMode="contains">
+                    <h:outputText value="#{item.totalGrossValue}"/>
+                </p:column>
+                <p:column filterBy="#{item.removalStatus}" headerText="#{msgs.removalStatus}" filterMatchMode="contains">
+                    <h:outputText value="#{item.removalStatus}"/>
+                </p:column>
+                <p:column filterBy="#{item.removalDate}" headerText="#{msgs.removalDate}" filterMatchMode="contains">
+                    <h:outputText value="#{item.removalDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column filterBy="#{item.userId.email}" headerText="#{msgs.userEmail}" filterMatchMode="contains">
+                    <h:outputText value="#{item.userId.email}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs.options}"/>
+                    </f:facet>
+                    <p:commandButton action="#{invoiceBacking.addItem(item.id)}" value="#{msgs.add}" update=":invoiceFormID:invoiceTableID" />
+                    <p:commandButton action="#{invoiceBacking.removeItem(item.id)}" value="#{msgs.del}" update="invoiceFormID:invoiceTableID" />
+                    <p:commandButton action="#{invoiceBacking.loadIndivTracks(item.id)}" value="#{msgs.removeIndivTracks}" />
+                    <p:commandButton action="#{invoiceBacking.loadEditForOrders(item.id)}" value="#{msgs.edit}" update="invoiceFormID:invoiceTableID" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,108 @@
+<ui:composition template="/WEB-INF/templates/masterTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui">
+    <meta name="author" content="Evan G"/>
+    <ui:define name="WindowTitle">
+        #{albumBacking.album.title} | Pandamedia
+    </ui:define>
+    <ui:define name="css">
+        <h:outputStylesheet name="album.css" library="css"/>
+        <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome-jsf.css" />
+    </ui:define>
+    <ui:define name="page-content">
+        <h:body class = "bodyClass">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-md-offset-4">
+                        <img class="albumArt" src="../resources/coverart/#{albumBacking.album.coverArtId.imagePath}" style="height: 250px; width: 250px;"/>
+                    </div>
+                    <div class="col-md-3 album-info">
+                        <h1>#{albumBacking.album.title}</h1>
+                        <h3>#{albumBacking.album.artistId.name}, 
+                            <h:outputText value="#{albumBacking.album.releaseDate.time}">
+                                <f:convertDateTime pattern="yyyy"/>
+                            </h:outputText>
+                        </h3>
+                        <h5>#{albumBacking.album.recordingLabelId.name}</h5>
+                        <div>
+                            <h:form>
+                                <b:commandButton ajax="false" icon-awesome="cart-plus" iconAlign="right" value=""
+                                                 look="success" action="#{cart.addAlbum(albumBacking.album)}">
+                                    <h:outputText value="#{albumBacking.album.listPrice - albumBacking.album.salePrice}">
+                                        <f:convertNumber minFractionDigits="2"/>
+                                    </h:outputText>
+
+<!--                                    <f:ajax render="j_idt15:shopping-cart-count"/>-->
+                                </b:commandButton>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <hr style="width:75%"/>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <table class="table table-inverse track_list" style="background-color: #17171b; border: 1px solid lightgray;">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>#{msgs.songCAPS}</th>
+                                    <th style="text-align: left;"><i class="fa fa-circle-o-notch" aria-hidden="true"></i></th>
+                                    <th style="text-align: right;"><i class="fa fa-shopping-cart" aria-hidden="true"></i></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody class="scrollbar" id="style-1">
+                                <ui:repeat value="#{albumBacking.album.trackList}" var="tracks">
+                                    <tr>
+                                        <th scope="row">#{tracks.albumTrackNumber}</th>
+                                        <td>
+                                            <h:form>
+                                                <h:commandLink action="#{trackBacking.trackPage(tracks)}">
+                                                    #{tracks.title}
+                                                </h:commandLink>                               
+                                            </h:form>    
+                                        </td>                            
+                                        <td>#{tracks.playLength}</td>
+                                        <td width="50">
+                                            <h:form>
+                                                <b:commandButton ajax="false" icon-awesome="cart-plus" iconAlign="right" value="#{tracks.listPrice}" look="primary" 
+                                                                 action="#{cart.addTrack(tracks)}">
+<!--                                                    <f:ajax render="j_idt15:shopping-cart-count"/>-->
+                                                </b:commandButton>
+
+                                            </h:form>
+                                        </td>
+                                    </tr>
+                                </ui:repeat>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <h2 id="suggested-header">#{msgs.suggested}</h2>
+                </div>
+                <div class="row">
+                    <ui:repeat value="#{albumBacking.getSuggestedAlbums(albumBacking.album.genreId.name)}" var="suggested">
+                        <div class="col-md-2">
+                            <h:form>
+                                <h:commandLink action="#{albumBacking.albumPage(suggested)}">
+                                    <img src="../resources/coverart/#{suggested.coverArtId.imagePath}" style="width:150px; height: 150px;"/>
+                                    <h4 id="suggested-title">#{suggested.title}</h4>
+                                </h:commandLink>
+                            </h:form>
+
+                        </div>
+                    </ui:repeat>
+                </div>
+            </div>
+        </h:body>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,70 @@
+/* 
+    Created on : 15-Mar-2017, 8:18:52 PM
+    Author     : Evang
+*/
+h2{
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.87);
+}
+body{
+    background-color: #17171b;
+}
+.card-wrapper{
+    background-color: #02b875;
+    padding: 15px;
+    border-radius: 2px;
+}
+.card-wrapper:hover {
+    background-color:#02b875;
+}
+.albumart{
+    margin: 0 auto;
+    width: 220px;
+    height: 220px;
+    border-radius: 2px;
+}
+.latest-caption{
+    text-align: left;
+    font-family: "Poppins", sans-serif;
+    color: #60656F;
+}
+
+.latest-caption h4{
+    color:black;
+    font-weight: bold;
+}
+.latest-caption h6{
+    color: rgba(255, 255, 255, .87);
+    margin: 0px;
+    padding: 0px;
+}
+
+/*bootstrap 4 figures*/
+figcaption,
+figure,
+main {
+  display: block;
+}
+
+figure {
+  margin: 1em 40px;
+}
+
+figure {
+  margin: 0 0 1rem;
+}
+
+.figure {
+  display: inline-block;
+}
+
+.figure-img {
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+.figure-caption {
+  font-size: 90%;
+  color: #636c72;
+}

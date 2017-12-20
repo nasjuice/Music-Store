@@ -1,0 +1,86 @@
+<ui:composition template="/WEB-INF/templates/masterTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <meta name="author" content="Evan G"/>
+    <ui:define name="WindowTitle">
+        #{msgs.popular} | Pandamedia
+    </ui:define>
+    <ui:define name="css">
+        <h:outputStylesheet library="css" name="onsale.css"/>
+    </ui:define>
+    <ui:define name="page-content">
+        <div class = "container onscont">
+            <div class="row">
+                <div class="header">
+                    <h1>#{msgs.popular}</h1>
+                </div>
+            </div>
+            <div class="row">
+                <h2 class="header">#{msgs.albumHeader}</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <b:carousel class="sale-car" style="width:50%; margin: 0 auto;" interval="2500">
+                        <!-- using a JTSL tag as this has to be rendered before the carosel is rendered -->
+                        <c:forEach items="#{albumBacking.popularAlbums}" var='sale'>
+                            <b:carouselItem>
+                                <h:form>
+                                    <h:commandLink action="#{albumBacking.albumPage(sale)}">
+                                        <img src="../resources/coverart/#{sale.coverArtId.imagePath}" style="height:250px; width:250px; 
+                                             display: block;margin-left: auto; margin-right: auto;"/>
+                                        <b:carouselCaption>
+                                            <h3>#{sale.title}</h3>
+                                            <h6>#{sale.recordingLabelId.name}</h6>
+                                        </b:carouselCaption>
+                                    </h:commandLink>
+                                </h:form>
+                            </b:carouselItem>
+
+                        </c:forEach>
+                    </b:carousel>
+                </div>
+            </div>
+            <hr/>
+            <div class="row">
+                <h2 class="header">#{msgs.tracks}</h2>
+            </div>
+            <!--<div class="row">
+                <div class="col-md-12">
+                        <b:carousel class="sale-car" style="width:50%; margin: 0 auto;" interval="2500">
+                            <c:forEach items="#{trackBacking.popularTracks}" var='tsale'>
+                                <b:carouselItem>
+                                    <img src="../resources/coverart/#{tsale.coverArtId.imagePath}" style="height:250px; width:250px; 
+                                         display: block;margin-left: auto; margin-right: auto;"/>
+                                    <b:carouselCaption>
+                                        <h3>#{tsale.title}</h3>
+                                        <h6>#{tsale.artistId.name}</h6>
+                                    </b:carouselCaption>
+                                </b:carouselItem>
+
+                            </c:forEach>
+                        </b:carousel>
+                </div>
+            </div>-->
+            <div class="row">
+                <h:form>
+                    <ui:repeat value="#{trackBacking.popularTracks}" var="tsale">
+                        <div class="col-xs-18 col-sm-6 col-md-3 card-wrap">
+                            <div class="thumbnail" style="min-height: 15em;">
+                                <h:commandLink action="#{albumBacking.albumPage(tsale.albumId)}">
+                                    <img src="#{request.contextPath}/resources/coverart/#{tsale.coverArtId.imagePath}" class="img-cover" style="width: 250px; height: 250px;"></img>
+                                </h:commandLink>
+                                <div class="caption">
+                                    <h:commandLink action="#{trackBacking.trackPage(tsale)}"><h4>#{tsale.title}</h4></h:commandLink>
+                                    <h:commandLink action="#{artistBacking.artistPage(tsale.artistId)}"><p>#{tsale.artistId.name}</p></h:commandLink>
+                                </div>
+                            </div>
+                        </div>
+                    </ui:repeat>
+                </h:form>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

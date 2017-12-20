@@ -1,0 +1,174 @@
+body{
+    position: relative;
+    width: 100%;
+    background-color: #17171b;
+    font-family: sans-serif;
+    padding-bottom: 190px;
+    overflow-x: hidden; 
+}
+
+h1{
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+    position: relative;
+    top: 55%;
+    transform: translateY(-45%);
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: rgba(255, 255, 255, 0.87);
+}
+
+.carousel-control.left, .carousel-control.right {
+    background-image: none
+}
+
+.carousel-caption{
+    width: auto;
+    height: 100%;
+}
+
+.item, .item active{
+    height: 50vh;
+    border-color: #17171b;
+    text-align: center;
+    background-color: #17171b;
+    border: none !important;
+}
+
+.item > a:hover{
+    outline: none;
+    text-decoration: none;
+}
+
+.fa-angle-right, .fa-angle-left{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 40px!important;
+    transition: ease-in-out 0.2s;
+}
+
+.carousel-indicators > li{
+    opacity: .5;
+}
+
+.browse-wrapper{
+    height: calc(50vh - 70px);
+}
+
+.browse-item{
+    text-align: center;
+    filter: none;
+    -webkit-filter: grayscale(0%);
+
+
+}
+.browse-item:hover{
+    transition: ease-in-out 0.4s;
+    filter: gray; /* IE6-9 */
+    -webkit-filter: grayscale(100%); /* Chrome 19+ & Safari 6+ */
+}
+
+#browse-albums{
+    display: inline-block;
+    width: 100%;
+    height: calc(50vh - 70px);
+    float: left;
+    
+    background: url(../resources/images/image6.jpg) black no-repeat center center; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+}
+
+#browse-survey{
+    font-family: "Poppins", sans-serif;
+    color: white;
+    height: 100%;
+}
+#browse-rss{
+    color: white;
+    font-family: "Poppins", sans-serif;
+    display: inline-block;
+    max-height: 50vh;
+    overflow: auto;
+}
+
+#browse-artists{
+    height: calc(50vh - 70px);
+    display: inline-block;
+    width: 100%;
+    
+    background: url(../resources/images/image-artist2.jpg) black no-repeat center center; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    
+    /*#002f4b,#dc4225
+    background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 59%, rgba(0, 0, 0, 0.65) 100%), url(../resources/images/image3.jpg) black no-repeat center center; 
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(59%, rgba(0, 0, 0, 0)), color-stop(100%, rgba(0, 0, 0, 0.65))), url(../resources/images/image3.jpg) black no-repeat center center;
+    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 59%, rgba(0, 0, 0, 0.65) 100%), url(../resources/images/image3.jpg) black no-repeat center center; 
+    background: -o-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 59%, rgba(0, 0, 0, 0.65) 100%), url(../resources/images/image3.jpg) black no-repeat center center; 
+    background: -ms-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 59%, rgba(0, 0, 0, 0.65) 100%), url(../resources/images/image3.jpg) black no-repeat center center; 
+    background: linear-gradient(to bottom right, #002f4b, #dc4225), url(../resources/images/image3.jpg) black no-repeat center center; 
+    */
+    
+}
+
+.browse-caption{
+    position: relative;
+    top: 65%;
+    transform: translateY(-35%);
+    
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+    font-size: 48px;
+    color: rgba(255, 255, 255, .87);
+}
+
+.container-fix{
+    margin: 0;
+    padding: 0;
+}
+.card-wrapper{
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 2px;
+}
+.card-wrapper:hover{
+    background-color: #02b875
+}
+
+.page-content-wrapper{
+    padding-top: 70px;
+}
+
+.img-cover{
+    width: 250px;
+    height: 250px;
+    margin: 15px;
+}
+
+
+.card-wrap{
+    text-align: center;
+    max-width: 300px;
+}
+
+
+.caption{
+    height: 13em;
+}
+
+#artist-name, h4{
+    color: black;
+}
+
+
+#artist-name:hover, h4:hover{
+    color: #02b875;
+}
+

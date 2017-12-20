@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<ui:composition    
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+    xmlns:jsf="http://xmlns.jcp.org/jsf">
+      
+    <h:head>
+        <h:outputStylesheet library="css" name="menu.css"/>
+    </h:head>
+    <nav class="navbar navbar-default custom-nav nd">
+        <div class="container-fluid cnt-fx">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="brand-logo">
+                    <a class="navbar-brand nb" href="#{request.contextPath}/shop/mainpage.xhtml"><img alt="navbar-brand" src="#{request.contextPath}/resources/images/favicon.png"/>Pandamedia</a>
+                </div>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <h:form id="menuForm">
+                    <ul class="nav navbar-nav nn" id="type-nav">
+                        <li class="dropdown" id="type-dropdown">
+                            <a href="#" class="dropdown-toggle" id="typeDropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#{searchDropdown.toDisplay}<span class="caret"></span></a>
+                            <ul class="dropdown-menu" id="dropdown-menuId">
+                                <li id="albumLi"><h:commandLink id="albumButton" action="#{searchDropdown.setType('albums')}">#{msgs.albums}</h:commandLink></li>
+                                <li id="artistLi"><h:commandLink id="artistButton" action="#{searchDropdown.setType('artists')}">#{msgs.artists}</h:commandLink></li>
+                                <li id="trackLi"><h:commandLink id="trackButton" action="#{searchDropdown.setType('tracks')}">#{msgs.tracks}</h:commandLink></li>
+                                <li id="dateLi"><h:commandLink id="dateButton" action="#{searchDropdown.setType('date')}">#{msgs.date}</h:commandLink></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="navbar-form navbar-left">
+                        <div class="form-group fg">
+                            <h:inputText class="form-control fc searchInput" id="formInput" a:placeholder="#{msgs.searchPlaceholder}" value="#{Search.parameters}"/>
+                        </div>
+                        <h:commandLink class="btn btn-search sb" id="searchButton" action="#{Search.executeSearch()}"><i class="fa fa-search" style="font-size: 18px" aria-hidden="true"/></h:commandLink>
+                    </div>
+                    <ul class="nav navbar-nav nn navbar-right">
+                        <li jsf:id="shopping-cart-count"><h:commandLink styleClass="cart-link" action="#{cart.setPrevPage()}">
+                                <i class="fa fa-shopping-cart" aria-hidden="true"></i><h5 class="cart-items">#{cart.cartCount}</h5>
+                            </h:commandLink>
+                        </li>
+                        <li class="dropdown">
+                            <ui:fragment rendered="#{not userAction.isLogin()}">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#{msgs.signIn}<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><h:link outcome="#{userAction.setPrevPageLogin()}">#{msgs.loginHeader}</h:link></li>
+                                    <li><h:link outcome="#{userAction.setPrevPageRegister()}">#{msgs.registerBtn}</h:link></li>
+                                </ul>
+                            </ui:fragment>
+                            <ui:fragment rendered="#{userAction.isLogin()}">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#{userAction.currUser.firstName}<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><h:link outcome="downloads" value="#{msgs.downloads}"/></li>
+                                    <li><h:commandLink action="#{userAction.logout()}" value="#{msgs.logout}"/></li>
+                                </ul>
+                            </ui:fragment>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#{msgs.selectLanguage}<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><h:commandLink action="#{ChangeLanguage.frenchAction()}">#{msgs.frenchLanguage}</h:commandLink></li>
+                                <li><h:commandLink action="#{ChangeLanguage.englishAction()}">#{msgs.englishLanguage}</h:commandLink></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </h:form>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</ui:composition>

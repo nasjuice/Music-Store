@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+    <meta name="author" content="Hau Gilles Che" />
+    <div id="survey">
+        <h:form>
+            <h3>#{msgs.survey}</h3>
+            <p:outputLabel for="survey" value="#{surveyBean.survey.question}" id="surveyQuestionLbl"/>
+            <div id="surveyFormDiv">
+                <p:panel id="surveyOptionsPanel" rendered="#{surveyBean.showOptions}">
+                    <p:selectOneRadio id="survey" value="#{surveyBean.userChoice}" layout="responsive" columns="1">
+                        <f:selectItems value="#{surveyBean.answers}" var="a" itemLabel="#{answer}" itemValue="#{answer}"/>
+                    </p:selectOneRadio>
+                    <p:commandButton value="Submit" id="submitBtn" class="btn btn-default btn-danger" action="#{surveyBean.updateSurvey()}" update="@form"/>
+                </p:panel>
+            </div>
+            <div id="resultsDiv">
+                <p:panel id="resultsPanel" rendered="#{surveyBean.userAnswered}">
+                    <h4 id="resultsHeader">#{msgs.surveyResultHeader}</h4>
+                    <p:outputLabel for="votesA" value="#{surveyBean.survey.answerA}" id="answerALbl"/>
+                    <p:progressBar value="#{surveyBean.votesA}" labelTemplate="#{surveyBean.survey.votesA}" displayOnly="true" id="votesA"/>
+
+                    <p:outputLabel for="votesB" value="#{surveyBean.survey.answerB}" id="answerBLbl"/>
+                    <p:progressBar value="#{surveyBean.votesB}" labelTemplate="#{surveyBean.survey.votesB}" displayOnly="true" id="votesB"/>
+
+                    <p:outputLabel for="votesC" value="#{surveyBean.survey.answerC}" id="answerCLbl"/>
+                    <p:progressBar value="#{surveyBean.votesC}" labelTemplate="#{surveyBean.survey.votesC}" displayOnly="true" id="votesC"/>
+
+                    <p:outputLabel for="votesD" value="#{surveyBean.survey.answerD}" id="answerDLbl"/>
+                    <p:progressBar value="#{surveyBean.votesD}" labelTemplate="#{surveyBean.survey.votesD}" displayOnly="true" id="votesD"/>
+                </p:panel>
+            </div>
+        </h:form>
+    </div>
+    <h:outputStylesheet name="survey.css" library="css"/>
+</ui:composition>

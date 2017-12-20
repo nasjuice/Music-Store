@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    template="/WEB-INF/templates/managerTemplate.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:b="http://bootsfaces.net/ui"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:pm="http://pandamedia.com/facelets">
+    <meta name="author" content="Erika Bourque" />
+    <ui:define name="WindowTitle">#{msgs.manReportZeroUserTitle}</ui:define>
+
+    <ui:define name="page-content">
+        <h:outputStylesheet name="reports.css" library="css"/>
+        <h1><h:outputText value="#{msgs.manReportZeroUserTitle}"/></h1>
+        <div align="center">
+            <pm:reportcalendars 
+                max="#{reportData.defaultEndDate}" 
+                start="#{reportData.startDate}" 
+                end="#{reportData.endDate}" 
+                updateTable="reportTable">
+            </pm:reportcalendars>
+        </div>
+        <br/>
+        <p:dataTable styleClass="report-table" 
+                     id="reportTable" 
+                     value="#{reports.getZeroUsers(reportData.startDate, reportData.endDate)}" 
+                     var="userVar">
+            <f:facet name="header">
+                #{msgs.detailClientHeader}
+            </f:facet>
+            <p:column>
+                <f:facet name="header">#{msgs.idHeader}</f:facet>
+                    #{userVar.id}
+            </p:column>
+            <p:column>
+                <f:facet name="header">#{msgs.titleHeader}</f:facet>
+                    #{userVar.title}
+            </p:column>
+            <p:column>
+                <f:facet name="header">#{msgs.lastNameHeader}</f:facet>
+                    #{userVar.lastName}
+            </p:column>
+            <p:column>
+                <f:facet name="header">#{msgs.firstNameHeader}</f:facet>
+                    #{userVar.firstName}
+            </p:column>
+            <p:column>
+                <f:facet name="header">#{msgs.companyHeader}</f:facet>
+                    #{userVar.companyName}
+            </p:column>
+            <p:column>
+                <f:facet name="header">#{msgs.streetHeader}</f:facet>
+                    #{userVar.streetAddress}
+            </p:column>
+            <p:column>
+                <f:facet name="header">#{msgs.cityHeader}</f:facet>
+                    #{userVar.city}
+            </p:column>
+            <p:column>
+                <f:facet name="header">#{msgs.provinceHeader}</f:facet>
+                    #{userVar.provinceId.name}
+            </p:column>
+            <p:column>
+                <f:facet name="header">#{msgs.countryHeader}</f:facet>
+                    #{userVar.country}
+            </p:column>
+            <p:column>
+                <f:facet name="header">#{msgs.postalCodeHeader}</f:facet>
+                    #{userVar.postalCode}
+            </p:column>
+            <p:column>
+                <f:facet name="header">#{msgs.homePhoneHeader}</f:facet>
+                    #{userVar.homePhone}
+            </p:column>
+            <p:column>
+                <f:facet name="header">#{msgs.cellPhoneHeader}</f:facet>
+                    #{userVar.cellPhone}
+            </p:column>
+            <p:column>
+                <f:facet name="header">#{msgs.emailHeader}</f:facet>
+                    #{userVar.email}
+            </p:column>
+            <p:column>
+                <f:facet name="header">#{msgs.lastGenreHeader}</f:facet>
+                    #{userVar.lastGenreSearched.name}
+            </p:column>
+            <p:column>
+                <f:facet name="header">#{msgs.isManagerHeader}</f:facet>
+                    #{userVar.isManager}
+            </p:column>
+        </p:dataTable>
+    </ui:define>
+</ui:composition>

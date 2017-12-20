@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    template="/WEB-INF/templates/managerTemplate.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:b="http://bootsfaces.net/ui"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <meta name="author" content="Naasir Jusab" />
+
+    <ui:define name="WindowTitle">#{msgs.edit}</ui:define>
+
+    <ui:define name="page-content">
+        <h:form>
+            <h1><h:outputText value="#{msgs.edit}"/></h1>
+            <p:panelGrid columns="2">
+                <p:outputLabel value="#{msgs.saleDate}" for="saleDate" />
+                <p:inputText id="saleDate" validator="#{dateValidation.validate}" value="#{invoiceBacking.invoice.saleDate}" title="SaleDate" required="true" requiredMessage="The SaleDate field is required.">
+                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                </p:inputText>
+                <p:outputLabel value="#{msgs.totalNetValue}" for="totalNetValue" />
+                <p:inputText id="totalNetValue" validator="#{pricesValidation.validate}" value="#{invoiceBacking.invoice.totalNetValue}" title="TotalNetValue" required="true" requiredMessage="The TotalNetValue field is required."/>
+                <p:outputLabel value="#{msgs.pstTax}" for="pstTax" />
+                <p:inputText id="pstTax" validator="#{pricesValidation.validate}" value="#{invoiceBacking.invoice.pstTax}" title="PstTax" required="true" requiredMessage="The PstTax field is required."/>
+                <p:outputLabel value="#{msgs.gstTax}" for="gstTax" />
+                <p:inputText id="gstTax" validator="#{pricesValidation.validate}" value="#{invoiceBacking.invoice.gstTax}" title="GstTax" required="true" requiredMessage="The GstTax field is required."/>
+                <p:outputLabel value="#{msgs.hstTax}" for="hstTax" />
+                <p:inputText id="hstTax" validator="#{pricesValidation.validate}" value="#{invoiceBacking.invoice.hstTax}" title="HstTax" required="true" requiredMessage="The HstTax field is required."/>
+                <p:outputLabel value="#{msgs.totalGrossValue}" for="totalGrossValue" />
+                <p:inputText id="totalGrossValue" validator="#{pricesValidation.validate}"  value="#{invoiceBacking.invoice.totalGrossValue}" title="TotalGrossValue" required="true" requiredMessage="The TotalGrossValue field is required."/>
+                <p:outputLabel value="#{msgs.removalStatus}" for="removalStatus"/>
+                <p:inputText id="removalStatus" value="#{invoiceBacking.invoice.removalStatus}" title="RemovalStatus" required="true" requiredMessage="The RemovalStatus field is required.">
+                    <f:validateLongRange minimum="0" maximum="1" />
+                </p:inputText>
+                <p:outputLabel value="#{msgs.removalDate}" for="removalDate" />
+                <p:inputText id="removalDate" validator="#{removalDateValidation.validate}" value="#{invoiceBacking.invoice.removalDate}" title="RemovalDate" >
+                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                </p:inputText>
+                <p:outputLabel value="#{msgs.userEmail}" for="userId" />
+                <p:selectOneMenu id="userId" value="#{invoiceBacking.invoice.userId}" converter="#{userConverter}" required="true" requiredMessage="The UserId field is required.">
+                    <f:selectItems value="#{userBacking.all}" var="userList" itemLabel="#{userList.email}" itemValue="#{userList}"/>
+                </p:selectOneMenu>
+            </p:panelGrid>
+            <p:commandButton ajax="false" action="#{invoiceBacking.edit()}" value="#{msgs.edit}"/>
+            <p:commandButton ajax="false" action="#{invoiceBacking.back()}" value="#{msgs.back}" immediate="true" />
+        </h:form>
+        <p:outputPanel autoUpdate="true">
+            <p:dialog id="msgDialog" widgetVar="messageDialog" modal="true"
+                      visible="#{facesContext.validationFailed}">
+                <p:messages id="messagesInDialog" />
+            </p:dialog>
+        </p:outputPanel>
+    </ui:define>
+</ui:composition>

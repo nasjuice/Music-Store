@@ -1,0 +1,241 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+    <application>
+        <resource-bundle>
+            <base-name>bundles.messages</base-name>
+            <var>msgs</var>
+        </resource-bundle>
+    </application>
+    <navigation-rule>        
+        <!-- Client Pages -->
+        <navigation-case>
+            <from-outcome>welcome</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>        
+        <navigation-case>
+            <from-outcome>main</from-outcome>
+            <to-view-id>/shop/mainpage.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>        
+        <navigation-case>
+            <from-outcome>cart</from-outcome>
+            <to-view-id>/shop/cart.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <!-- Not using redirect -->
+            <from-outcome>album</from-outcome>
+            <to-view-id>/shop/album.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <!-- Not using redirect -->
+            <from-outcome>artist</from-outcome>
+            <to-view-id>/shop/artist.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>browsealbum</from-outcome>
+            <to-view-id>/shop/browsealbums.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>browseartist</from-outcome>
+            <to-view-id>/shop/browseartists.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>latest</from-outcome>
+            <to-view-id>/shop/latest.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>onsale</from-outcome>
+            <to-view-id>/shop/onsale.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>popular</from-outcome>
+            <to-view-id>/shop/popular.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <!-- Not using redirect -->
+            <from-outcome>search</from-outcome>
+            <to-view-id>/shop/searchpage.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <!-- Not using redirect -->
+            <from-outcome>track</from-outcome>
+            <to-view-id>/shop/track.xhtml</to-view-id>
+        </navigation-case>
+        
+        <!-- User connection pages -->
+        <navigation-case>
+            <from-outcome>login</from-outcome>
+            <to-view-id>/userconnection/login.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>register</from-outcome>
+            <to-view-id>/userconnection/registration.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        
+        <!-- Client Secure pages navigation rules -->
+        <!-- Use redirects to pass through login and checkout filters -->
+        <navigation-case>
+            <from-outcome>finalization</from-outcome>
+            <to-view-id>/clientsecure/purchase/checkout.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>invoicesummary</from-outcome>
+            <to-view-id>/clientsecure/invoicesummary.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>downloads</from-outcome>
+            <to-view-id>/clientsecure/downloads.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        
+        <!-- Manager pages navigation rules -->
+        <!-- Use redirects to pass through login and manager filter -->
+        <navigation-case>
+            <from-outcome>manindex</from-outcome>
+            <to-view-id>/manager/manager_index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>mansales</from-outcome>
+            <to-view-id>/manager/salesPage.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>manclients</from-outcome>
+            <to-view-id>/manager/clients.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>manorders</from-outcome>
+            <to-view-id>/manager/orders.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>manreviews</from-outcome>
+            <to-view-id>/manager/reviews.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>mannewsfeeds</from-outcome>
+            <to-view-id>/manager/newsFeedManagement.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>mansurveys</from-outcome>
+            <to-view-id>/manager/surveyManagement.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>manbanners</from-outcome>
+            <to-view-id>/manager/bannerAdManagement.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>manordersedit</from-outcome>
+            <to-view-id>/manager/editOrders.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>manremoveindivtrack</from-outcome>
+            <to-view-id>/manager/removeIndivTracks.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>manaddalbum</from-outcome>
+            <to-view-id>/manager/album/addAlbum.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>maneditalbum</from-outcome>
+            <to-view-id>/manager/album/editAlbum.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>maneditsalesalbum</from-outcome>
+            <to-view-id>/manager/album/editSalesAlbum.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>maneditclient</from-outcome>
+            <to-view-id>/manager/client/editClients.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>manaddtrack</from-outcome>
+            <to-view-id>/manager/track/addTrack.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>maneditsalestrack</from-outcome>
+            <to-view-id>/manager/track/editSalesTrack.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>manedittrack</from-outcome>
+            <to-view-id>/manager/track/editTrack.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        
+        <!-- Manager report pages navigation rules -->
+        <!-- Use redirects to pass through login and manager filter -->
+        <navigation-case>
+            <from-outcome>reptrack</from-outcome>
+            <to-view-id>/manager/reports/salesbytrack.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>repalbum</from-outcome>
+            <to-view-id>/manager/reports/salesbyalbum.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>repartist</from-outcome>
+            <to-view-id>/manager/reports/salesbyartist.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>reptopclients</from-outcome>
+            <to-view-id>/manager/reports/topclients.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>reptopsellers</from-outcome>
+            <to-view-id>/manager/reports/topsellers.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>reptotal</from-outcome>
+            <to-view-id>/manager/reports/totalsales.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>repzeroclients</from-outcome>
+            <to-view-id>/manager/reports/zeroclients.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>repzerotracks</from-outcome>
+            <to-view-id>/manager/reports/zerotracks.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>repclient</from-outcome>
+            <to-view-id>/manager/reports/salesbyclient.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>   
+</faces-config>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>        
+        <meta name="author" content="Erika Bourque" />
+        <h:outputStylesheet name="css/bootstrap.css"/>
+        <h:outputStylesheet library="css" name="manager_style.css"/>        
+        <link rel="icon" type="image/png" href="#{request.contextPath}/resources/images/favicon.png" />
+        <title>
+            <ui:insert name="WindowTitle" />
+        </title>
+    </h:head>
+    <f:view locale="#{ChangeLanguage.locale}">
+        <h:body>
+            <h:outputScript library="js" name="ajaxfix.js" target="head"/>
+            <ui:include src="../sections/manager_menu.xhtml" />       
+            <ui:insert name="page-content" />
+        </h:body>
+    </f:view>
+</html>

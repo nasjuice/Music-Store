@@ -1,0 +1,15 @@
+/* 
+    Created on : Mar 22, 2017, 2:35:13 PM
+    Author     : Erika Bourque
+*/
+
+.labels {
+    text-align: right;
+}
+body{
+    font-family: "Poppins";
+    padding-top:90px;
+}
+#billingInfo{
+    font-size: 16px;
+}

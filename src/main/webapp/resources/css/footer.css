@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+.footer-wrapper{
+    position: absolute;
+    background-color: white;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    width: 100%;
+    min-height: 190px;
+}
+
+.pad{
+    padding-top: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.footer-text-hover{
+    padding-top: 1.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+.footer-cont{
+    width: 100%;
+}
+
+.row2{
+    text-align: center;
+    margin-left: -4px;
+    margin-right: -4px;
+}
+
+.col2{
+    margin-left: 4px;
+    margin-right: 4px;
+    float: left;
+    position: relative;
+}
+
+.col-title{
+    text-transform: uppercase;
+    font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica", "Arial", sans-serif;
+    letter-spacing: -.04em;
+    font-weight: 700;
+    color: rgba(0, 0, 0, .6);
+}
+
+.ul-container{
+    margin-bottom: 1.5rem;
+    
+}
+
+.nav-footer{
+    font-weight: 600;
+    padding-left: 0;
+    margin-bottom: 0;
+    
+    list-style: none;
+}
+
+.nav-link{
+    font-family: "Segoe UI","Trebuchet MS","PT Sans","Helvetica Neue",HelveticaNeue-Light,Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    display: inline-block;
+    position: relative;
+    line-height: 2em;
+    color: rgba(0, 0, 0, .87);
+}
+
+.nav-link:hover{
+    
+    text-decoration: none;
+    color: #02b875;
+}
+
+.col-title{
+    font-size: 16px;
+    margin-bottom: 1em;
+}
+
+.col-brand{
+    float: left;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.clearfix{
+    margin-bottom: 3em;
+}
+
+.footer-brand{
+    margin-right: 1rem;
+}
+
+.footer-brand:hover .brand-span{
+    text-decoration: none;
+    color: #02b875!important;
+}
+
+.brand-span{
+    font-weight: 700;
+    letter-spacing: -0.8px;
+    line-height: .8;
+    color: rgba(0, 0, 0, .87);
+    font-size: 20px;
+}
+
+a:hover, a:focus{
+    text-decoration: none;
+}

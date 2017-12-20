@@ -1,0 +1,154 @@
+<ui:composition template="/WEB-INF/templates/masterTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:p="http://primefaces.org/ui">
+    <meta name="author" content="Evangelo Glicakis, Erika Bourque" />
+    
+    <ui:define name="WindowTitle">
+        #{msgs.cartHeader} | Pandamedia
+    </ui:define>
+    <ui:define name="css">
+        <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome-jsf.css" />
+        <h:outputStylesheet library="css" name="cart.css" />
+    </ui:define>
+    <ui:define name="page-content">        
+        <p:growl globalOnly="true" id="growl" showDetail="false" showSummary="true" life="5000" />
+        <div class="container">
+            <div class="row">
+                <h:panelGroup rendered="#{cart.isCartEmpty}">
+                    <h4>#{msgs.cartEmpty}</h4>
+                </h:panelGroup>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-10 col-md-offset-1">                     
+                    <table jsf:id= "cart" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#{msgs.product}</th>
+                                <th></th>
+                                <th class="text-center">#{msgs.priceHeader}</th>
+                                <th class="text-center">#{msgs.totalHeader}</th>
+                                <th> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ui:repeat value="#{cart.albumsFromCart}" var="albums">
+                                <tr>
+                                    <td class="col-sm-9 col-md-8">
+                                        <div class="media">
+                                            <h:form>
+                                                <h:commandLink styleClass="thumbnail pull-left albumart" action="#{albumBacking.albumPage(albums)}">
+                                                    <img class="media-object" src="#{request.contextPath}/resources/coverart/#{albums.coverArtId.imagePath}" style="width: 150px; height: 150px;"/>
+                                                </h:commandLink>
+                                            </h:form>
+
+                                            <div class="media-body">
+                                                <h4 class="media-heading"><a href="#">#{albums.title}</a></h4>
+                                                <h5 class="media-heading"> #{msgs.by} <a href="#">#{albums.artistId.name}</a></h5>
+                                            </div>
+                                        </div></td>
+                                    <td class="col-sm-1 col-md-1" style="text-align: center">
+                                        
+                                        <!--<input type="email" class="form-control" id="exampleInputEmail1" value="3">-->
+                                    </td>
+                                    <td class="col-sm-1 col-md-1 text-center">
+                                        <strong>$<h:outputText value="#{albums.listPrice - albums.salePrice}">
+                                                <f:convertNumber minFractionDigits="2"/>
+                                            </h:outputText></strong>
+                                    </td>
+                                    <td class="col-sm-1 col-md-1 text-center"><strong id="quantity-sum"></strong></td>
+                                    <td class="col-sm-1 col-md-1 text-right">
+                                        <h:form>
+
+                                            <p:commandButton actionListener="#{cart.removeAlbumFromCart(albums)}"
+                                                             update="cart" icon="fa fa-trash"
+                                                             styleClass="btn btn-danger"/>
+                                        </h:form>
+                                    </td>
+                                </tr>
+                                <!-- track listings -->
+                                <tr>
+                                    <th></th>
+                                    <th>#{msgs.trackNumHeader}</th>
+                                    <th>#{msgs.title}</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                <ui:repeat value="#{albums.trackList}" var="tracks">
+                                    <tr>
+                                        <td></td>
+                                        <td class="col-sm-1">#{tracks.albumTrackNumber}</td>
+                                        <td class="col-md-6 offset-md-3" colspan="3">#{tracks.title}<br/></td>
+                                    </tr>
+                                </ui:repeat>
+                            </ui:repeat>
+                            <!-- individual tracks -->
+                            <ui:repeat value="#{cart.tracksFromCart}" var="individual_tracks">
+                                <tr>
+                                    <td class="col-sm-9 col-md-8">
+                                        <div class="media">
+                                            <h:form>
+                                                <h:commandLink styleClass="thumbnail pull-left albumart" action="#{trackBacking.trackPage(individual_tracks)}">
+                                                    <img class="media-object" src="#{request.contextPath}/resources/coverart/#{individual_tracks.coverArtId.imagePath}" style="width: 90px; height: 90px;"/>
+                                                </h:commandLink>
+                                            </h:form>
+
+                                            <div class="media-body">
+                                                <h4 class="media-heading"><a href="#">#{individual_tracks.title}</a></h4>
+                                                <h5 class="media-heading"> #{msgs.by} <a href="#">#{individual_tracks.artistId.name}</a></h5>
+                                            </div>
+                                        </div></td>
+                                    <td></td>
+                                    <td class="col-sm-1 col-md-1 text-center"><strong>$#{individual_tracks.listPrice - individual_tracks.salePrice}</strong></td>
+                                    <td class="col-sm-1 col-md-1 text-center"><strong id="quantity-sum"></strong></td>
+                                    <td class="col-sm-1 col-md-1 text-right">
+                                        <h:form>
+                                            <p:commandButton actionListener="#{cart.removeTrackFromCart(individual_tracks)}"
+                                                             update="cart" icon="fa fa-trash"
+                                                             styleClass="btn btn-danger btn-lg"/>
+                                        </h:form>
+                                    </td>
+                                </tr>
+                            </ui:repeat>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>   </td>
+                                <td>   </td>
+                                <td>   </td>
+                                <td><h5>#{msgs.subtotalHeader}</h5>
+                                </td>
+                                <td class="text-right">
+                                    <h5>
+                                        <strong><h:outputText value="#{cart.subTotal}">
+                                                <f:convertNumber minFractionDigits="2"/>
+                                            </h:outputText></strong>
+                                    </h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>   </td>
+                                <td>   </td>
+                                <td>   </td>
+                                <td>
+                                    <h:form>
+                                        <b:commandButton look="default" value="#{msgs.continueShop}" action="#{cart.continueShopping()}"/>
+                                    </h:form>
+                                </td>
+                                <td>
+                                    <h:form id="checkoutForm">
+                                        <b:commandButton id="checkoutBtn" look="success" value="#{msgs.checkoutBtn}" icon-awesome="credit-card" action="#{cart.verifyCartContents()}" update="growl"/>
+                                    </h:form>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

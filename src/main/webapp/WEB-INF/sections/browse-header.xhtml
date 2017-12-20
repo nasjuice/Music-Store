@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<ui:composition    
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <head>
+        <h:outputStylesheet library="css" name="browse-header.css"/>
+    </head>
+    <div class="choice-header">
+        <h:form>
+            <div class="pos-name">
+                <span class="pre-text">#{msgs.browse}</span>
+                <li class="dropdown" id="browse-dropdown">
+                    <a href="#" class="dropdown-toggle browse-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#{browseChange.type}<span class="caret"></span></a>
+                    <ul class="dropdown-menu browse-menu">
+                        <li><h:commandLink action="#{browseChange.browseAlbums()}">#{msgs.albums}</h:commandLink></li>
+                        <li><h:commandLink action="#{browseChange.browseArtists()}">#{msgs.artists}</h:commandLink></li>
+                    </ul>
+                </li>
+            </div>
+        </h:form>
+    </div>
+    <hr style="border-color: rgba(255, 255, 255, .87)"/>
+</ui:composition>

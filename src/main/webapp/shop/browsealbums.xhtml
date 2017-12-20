@@ -1,0 +1,74 @@
+<ui:composition template="/WEB-INF/templates/browseTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:jsf="http://xmlns.jcp.org/jsf">
+    <meta name="author" content="Evan G"/>
+    <ui:define name="WindowTitle">
+        #{msgs.browsealbums} | Pandamedia
+    </ui:define>
+    <ui:define name="css">
+        <h:outputStylesheet name="browsealbums.css" library="css"/>
+    </ui:define>
+    <ui:define name="browse-content">
+        <h:outputScript library="js" name="ajaxfix.js" target="head"/>
+        
+        <div class="container">
+            <div class = "row" style="text-align: left;">
+                <h2>#{msgs.popularalbums}</h2>
+            </div>
+            <div id="popular-browse" class="row is-flex">
+
+                <ui:repeat value="#{albumBacking.popularAlbums}" var="pop">
+                    <div class="col-sm-2">
+                        <h:form>
+                            <h:commandLink action="#{albumBacking.albumPage(pop)}" styleClass="">
+                                <figure class="figure card-wrapper">    f
+                                    <img src="#{request.contextPath}/resources/coverart/#{pop.coverArtId.imagePath}" class="figure-img img-fluid pop-albumart"/>
+                                    <div class="latest-caption">
+                                        <h5>#{pop.title}</h5>
+                                        <h6>#{pop.artistId.name}</h6>
+                                    </div>
+                                </figure>
+                            </h:commandLink>
+                        </h:form>
+                    </div>                
+                </ui:repeat>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row" style="text-align:left;"><h2>#{msgs.browsegenre}</h2></div>
+            <div class="row" style="text-align: left;">                
+                <h:form>
+                    <ui:repeat value="#{genreBacking.allGenresNames}" var="genres">
+                        <h:commandLink action="#{albumBacking.setGenreString(genres)}" styleClass="genre-links"> 
+                            <h4 style="display: inline-block; margin: 2%;">#{genres}</h4>
+                            <f:ajax render="album-genre"/>
+                        </h:commandLink>
+                    </ui:repeat>
+                </h:form>
+            </div>
+            <div class="row row-eq-height">
+                <div jsf:id="album-genre">
+                    <ui:repeat value="#{albumBacking.albumFromGenre}" var="ag">
+                        <div class="col-md-2 genre-row">
+                            <h:form>
+                                <h:commandLink action="#{albumBacking.albumPage(ag)}" styleClass="">
+                                    <figure class="figure card-wrapper">
+                                        <img src="#{request.contextPath}/resources/coverart/#{ag.coverArtId.imagePath}" class="figure-img img-fluid albumart"/>
+                                        <div class="latest-caption">
+                                            <h5>#{ag.title}</h5>
+                                            <h6>#{ag.artistId.name}</h6>
+                                        </div>
+                                    </figure>
+                                </h:commandLink>
+                            </h:form>
+                        </div>                
+                    </ui:repeat>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+
+</ui:composition>

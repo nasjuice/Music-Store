@@ -1,0 +1,30 @@
+/* 
+    Created on : 28-Mar-2017, 3:55:32 PM
+    Author     : Evang
+*/
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+body{
+    background-color: #17171b;
+    font-family: sans-serif;
+    position: relative;
+}
+.header{
+    color: white;
+}
+#sale-car{
+    margin: 0 auto;
+}
+.carousel-control.left, .carousel-control.right {
+    background-image: none
+}
+.carousel-caption {
+    position: relative;
+    left: auto;
+    right: auto;
+}
+
+.onscont{
+    position: relative;
+    padding-top: 70px;
+    padding-bottom: 190px;
+}

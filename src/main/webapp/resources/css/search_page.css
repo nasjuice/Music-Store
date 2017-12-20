@@ -1,0 +1,59 @@
+body{
+    background-color: #17171b; 
+}
+
+.card-wrap{
+    text-align: center;
+}
+
+.displaySearchResults{
+    min-height: calc(100vh - 380px);
+    position: relative;
+    top: 70px;
+    padding: 2em;
+    margin-bottom:  190px;
+}
+
+h2{
+    font-family: "Poppins";
+    text-transform: uppercase;
+    color: white;
+    font-size: 24px;
+    padding-bottom: 2em;
+}
+
+p, h4, h5{
+    color: black;
+}
+
+h6{
+    color: white;
+    font-size: 24px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+   
+}
+
+p:hover, h4:hover, h5:hover{
+    color: #02b875;
+}
+
+.img-cover{
+    width: 250px;
+    height: 250px;
+}
+
+.caption{
+    height: 13em;
+}
+
+.artist-name{
+    font-family: "Segoe UI", sans-serif;
+    font-size: 16px;
+    color: white;
+    line-height: 3em;
+}
+
+.artist-name:hover{
+    color: #02b875;
+}

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>#{msgs.registrationHeader}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="author" content="Hau Gilles Che"/>
+    </h:head>
+    <f:view locale="#{ChangeLanguage.locale}">
+    <h:body>
+        <f:view locale="#{ChangeLanguage.locale}">
+            <div class="container">
+                <div class="panel-heading">
+                    <h3 class="panel-title">#{msgs.registrationHeader}</h3>
+                </div>
+                <div class="panel-body">
+                    <h:form id="registrationForm">
+                        <p:panel id="basicInfoPanel" header="#{msgs.basicInfoHeader}" class="panel-title">
+                            <div class="row">
+                                <div class="col-xs-2 col-sm-2 col-md-2">
+                                    <div class="form-group">
+                                        <h:inputText class="form-control input-sm" id="titleInput" value="#{userBean.shopUser.title}"
+                                                     required="true" a:placeholder="#{msgs.titleHeader}*" requiredMessage="#{msgs.requiredFieldMsg}"/>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <h:message for="titleInput" style="color:red;"/>
+                                    </div>                                      
+                                </div>                                   
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <h:inputText class="form-control input-sm" id="fnameInput" value="#{userBean.shopUser.firstName}"
+                                                     required="true" a:placeholder="#{msgs.firstNameHeader}*" requiredMessage="#{msgs.requiredFieldMsg}"/>
+                                        <h:message for="fnameInput" style="color:red"/>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <h:inputText class="form-control input-sm" id="lnameInput" value="#{userBean.shopUser.lastName}"
+                                                     required="true" a:placeholder="#{msgs.lastNameHeader}*" requiredMessage="#{msgs.requiredFieldMsg}"/>
+                                        <h:message for="lnameInput" style="color:red"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <h:inputText class="form-control input-sm" id="companyInput" value="#{userBean.shopUser.companyName}"
+                                             a:placeholder="#{msgs.companyHeader}"/>
+                            </div>
+
+                            <div class="form-group">
+                                <h:inputText class="form-control input-sm" id="emailInput" value="#{userBean.shopUser.email}"
+                                             required="true" validator="#{userAction.validateEmail}"
+                                             a:placeholder="#{msgs.emailHeader}*" requiredMessage="#{msgs.requiredFieldMsg}">
+                                    <f:ajax event="valueChange" render="emailError"/>
+                                </h:inputText>
+                                <h:message id="emailError" for="emailInput" style="color:red"/>
+                            </div>
+
+                            <div class="row">
+
+
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <h:inputSecret class="form-control input-sm" id="passwd" value="#{userBean.password}"
+                                                       required="true" a:placeholder="#{msgs.passwordHeader}*" requiredMessage="#{msgs.requiredFieldMsg}"/>
+                                        <h:message for="passwd" style="color:red"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </p:panel>
+
+                        <p:panel id="addressInfoPanel" header="#{msgs.addressInfoHeader}" class="panel-title">
+                            <div class="form-group">
+                                <h:inputText class="form-control input-sm" id="address1Input" value="#{userBean.shopUser.streetAddress}"
+                                             required="true" a:placeholder="#{msgs.address1Header}*" requiredMessage="#{msgs.requiredFieldMsg}"/>
+                                <h:message for="address1Input" style="color:red"/>
+                            </div>
+                            <div class="form-group">
+                                <h:inputText class="form-control input-sm" id="address2Input" value="#{userBean.shopUser.streetAddress2}"
+                                             a:placeholder="#{msgs.address2Header}"/>
+                            </div>
+
+                            <div class="form-group">
+                                <h:inputText class="form-control input-sm" id="cityInput" value="#{userBean.shopUser.city}"
+                                             required="true" a:placeholder="#{msgs.cityHeader}*" requiredMessage="#{msgs.requiredFieldMsg}"/>
+                                <h:message for="cityInput" style="color:red"/>
+                            </div>
+
+                            <div class="row">    
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <h:selectOneMenu  class="form-control input-sm" id="provinceListbox" binding="#{temp}" required="true" requiredMessage="#{msgs.requiredFieldMsg}">
+                                            <f:selectItems value="#{userAction.provinces}" var="province" itemLabel="#{province.name}"
+                                                           a:placeholder="#{msgs.provinceHeader}*"/>
+                                        </h:selectOneMenu>
+                                        <h:message for="provinceListbox" style="color:red"/>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <h:inputText class="form-control input-sm" id="countryInput" value="#{userBean.shopUser.country}"
+                                                     required="true" a:placeholder="#{msgs.countryHeader}*" requiredMessage="#{msgs.requiredFieldMsg}"/>
+                                        <h:message for="countryInput" style="color:red"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <h:inputText class="form-control input-sm" id="postalCodeInput" value="#{userBean.postalCode}"
+                                             required="true" a:placeholder="#{msgs.postalCodeHeader}*" requiredMessage="#{msgs.requiredFieldMsg}">
+                                    <p:ajax update="postalCodeInput" event="blur"/>
+                                </h:inputText>
+
+                                <h:message for="postalCodeInput" style="color:red"/>
+                            </div>
+
+                            <div class="form-group">
+                                <h:inputText class="form-control input-sm" id="homePhoneInput" value="#{userBean.homePhone}"
+                                             required="true" a:placeholder="#{msgs.homePhoneHeader}*" requiredMessage="#{msgs.requiredFieldMsg}">
+                                    <p:ajax update="homePhoneInput" event="keyup"/>
+                                </h:inputText>
+                                <h:message for="homePhoneInput" style="color:red"/>
+                            </div>
+                            <div class="form-group">
+                                <h:inputText class="form-control input-sm" id="cellPhoneInput" value="#{userBean.cellPhone}"
+                                             a:placeholder="#{msgs.cellPhoneHeader}" required="false"/>
+                                <h:message for="cellPhoneInput" style="color:red"/>
+                            </div>
+                        </p:panel>           
+                        <div class="form-group">
+                            <h:commandButton class="btn btn-info btn-block" id="submitBtn" value="#{msgs.registerBtn}" action="#{userAction.register(temp.value)}"/>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </f:view>
+        <h:outputStylesheet library="css" name="style.css"/>
+        <h:outputStylesheet library="css" name="bootstrap.css"/>
+    </h:body>
+    </f:view>
+</html>

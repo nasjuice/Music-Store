@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/templates/masterTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="WindowTitle">#{msgs.downloads}</ui:define>
+    <meta name="author" content="Naasir Jusab" />
+    <ui:define name="page-content">
+        <h:outputStylesheet library="css" name="bootstrap.css" />
+        <h:outputStylesheet library="css" name="mainpage.css" />
+        <h:outputStylesheet library="css" name="style.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>  
+        <h:form id="downloadsFormID">
+            <h1 style="margin-top: 2%; margin-left:2%;"><h:outputText value="#{msgs.downloads}"/></h1>
+            <p:dataTable value="#{invoiceBacking.loadDownloadsTable()}" id="downloadsTableID" var="item" paginator="true" rows="5">
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs.title}" />
+                    </f:facet>
+                    <h:outputText value="#{item.title}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs.releaseDate}" />
+                    </f:facet>
+                    <h:outputText value="#{item.releaseDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs.playLength}" />
+                    </f:facet>
+                    <h:outputText value="#{item.playLength}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs.albumTitle}" />
+                    </f:facet>
+                    <h:outputText value="#{item.albumId.title}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs.artistName}" />
+                    </f:facet>
+                    <h:outputText value="#{item.artistId.name}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs.songwriterName}" />
+                    </f:facet>
+                    <h:outputText value="#{item.songwriterId.name}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs.genreName}" />
+                    </f:facet>
+                    <h:outputText value="#{item.genreId.name}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs.options}"/>
+                    </f:facet>
+                    <h:outputLink value="#{request.contextPath}/resources/music/mozart.mp3">#{msgs.download}</h:outputLink>
+                </p:column>
+            </p:dataTable>   
+        </h:form>
+    </ui:define>
+</ui:composition>

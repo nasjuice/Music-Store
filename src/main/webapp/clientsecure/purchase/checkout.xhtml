@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/WEB-INF/templates/masterTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:p="http://primefaces.org/ui">
+    <meta name="author" content="Erika Bourque"/>
+    <ui:define name="WindowTitle">#{msgs.finalizationTitle}</ui:define>
+    <ui:define name="css">
+        <h:outputStylesheet name="checkout.css" library="css"/>
+    </ui:define>
+    <ui:define name="page-content">
+        <div class="container">
+            <p:growl id="growl" showDetail="false" showSummary="true" life="5000" />
+            <div id="content">
+                <div id="billingInfo">
+                    <h3>#{msgs.billingTitle}</h3>
+                    <b:panelGrid columns="1">
+                        <h:outputLabel>#{userAction.currUser.title} #{userAction.currUser.firstName} #{userAction.currUser.lastName}</h:outputLabel>
+                        <h:outputLabel>#{userAction.currUser.streetAddress}</h:outputLabel>
+                        <h:outputLabel>#{userAction.currUser.city}, #{userAction.currUser.provinceId.name} #{userAction.currUser.postalCode}</h:outputLabel>
+                        <h:outputLabel>#{userAction.currUser.country}</h:outputLabel>
+                        <h:outputLabel>#{userAction.currUser.homePhone} #{userAction.currUser.cellPhone}</h:outputLabel>
+                    </b:panelGrid>
+                </div>
+                <div id="purchaseDetails">
+                    <b:panelGrid columns="1" rendered="#{not cart.tracksFromCart.isEmpty()}">
+                        <h3>#{msgs.trackLbl}</h3>
+                        <b:dataTable searching="false" paginated="false" var="track" value="#{cart.tracksFromCart}" >
+                            <b:column>
+                                <f:facet name="header">#{msgs.titleHeader}</f:facet>
+                                    #{track.title}
+                            </b:column>
+                            <b:column>
+                                <f:facet name="header">#{msgs.artistHeader}</f:facet>
+                                    #{track.artistId.name}
+                            </b:column>
+                            <b:column>
+                                <f:facet name="header">#{msgs.priceHeader}</f:facet>
+                                <h:outputText value="#{track.listPrice - track.salePrice}">
+                                    <f:convertNumber type="currency" />
+                                </h:outputText>
+                            </b:column>
+                        </b:dataTable>
+                    </b:panelGrid>
+                    <b:panelGrid columns="1" rendered="#{not cart.albumsFromCart.isEmpty()}">
+                        <h3>#{msgs.albumLbl}</h3>
+                        <b:dataTable searching="false" paginated="false" value="#{cart.albumsFromCart}" var="album">
+                            <b:column>
+                                <f:facet name="header">#{msgs.titleHeader}</f:facet>
+                                    #{album.title}
+                            </b:column>
+                            <b:column>
+                                <f:facet name="header">#{msgs.artistHeader}</f:facet>
+                                    #{album.artistId.name}
+                            </b:column>
+                            <b:column>
+                                <f:facet name="header">#{msgs.priceHeader}</f:facet>
+                                <h:outputText value="#{album.listPrice - album.salePrice}">
+                                    <f:convertNumber type="currency" />
+                                </h:outputText>
+                            </b:column>
+                        </b:dataTable>
+                    </b:panelGrid>
+                    <b:panelGrid columnClasses="labels, output" columns="2">
+                        <h:outputLabel value="#{msgs.subtotalHeader}" />
+                        <h:outputLabel value="#{cart.subTotal}">
+                            <f:convertNumber type="currency" />
+                        </h:outputLabel>
+
+                        <h:outputLabel value="#{msgs.gstLbl}" />
+                        <h:outputLabel value="#{checkout.gst}">
+                            <f:convertNumber type="currency" />
+                        </h:outputLabel>
+
+                        <h:outputLabel value="#{msgs.pstLbl}" />
+                        <h:outputLabel value="#{checkout.pst}">
+                            <f:convertNumber type="currency" />
+                        </h:outputLabel>
+
+                        <h:outputLabel value="#{msgs.hstLbl}" />
+                        <h:outputLabel value="#{checkout.hst}">
+                            <f:convertNumber type="currency" />
+                        </h:outputLabel>
+
+                        <h:outputLabel value="#{msgs.totalHeader}" />
+                        <h:outputLabel value="#{checkout.total}">
+                            <f:convertNumber type="currency" />
+                        </h:outputLabel>
+                    </b:panelGrid>
+                </div>
+                <div id="creditCardDetails">
+                    <h3>#{msgs.cardTitle}</h3>
+                    <h:form id="credit">
+                        <b:panelGrid columns="2" columnClasses="labels, input">
+                            <h:outputLabel for="cardType" value="#{msgs.cardTypeLbl}" />
+                            <b:selectOneMenu id="cardType" required="true" value="#{creditCard.cardType}">
+                                <f:selectItem itemLabel="Visa" itemValue="Visa"/>
+                                <f:selectItem itemLabel="MasterCard" itemValue="MasterCard"/>
+                            </b:selectOneMenu>
+
+                            <h:outputLabel for="cardNum" value="#{msgs.cardNumLbl}" />
+                            <b:inputText id="cardNum" required="true" value="#{creditCard.cardNum}">
+                                <f:validator validatorId="creditNumValidator" />
+                            </b:inputText>
+
+                            <h:outputLabel for="cardName" value="#{msgs.cardNameLbl}" />
+                            <b:inputText id="cardName" required="true" value="#{creditCard.cardName}"/>
+
+                            <h:outputLabel for="cardCode" value="#{msgs.cardCodeLbl}" />
+                            <b:inputText id="cardCode" required="true" value="#{creditCard.cardCode}">
+                                <f:validateLongRange minimum="0" maximum="9999" />
+                            </b:inputText>
+
+                            <h:outputLabel for="cardMonth" value="#{msgs.cardExpDateLbl}" />
+                            <h:panelGroup>
+                                <h:selectOneMenu id="cardMonth" required="true" value="#{creditCard.cardMonth}">
+                                    <f:selectItems value="#{checkout.monthSelector}" />
+                                </h:selectOneMenu>
+                                <h:selectOneMenu id="cardYear" required="true" value="#{creditCard.cardYear}">
+                                    <f:selectItems value="#{checkout.yearSelector}" var="y" itemValue="#{y}" itemLabel="#{y}" />
+                                    <f:validator validatorId="creditMonthValidator"  />
+                                </h:selectOneMenu>
+                            </h:panelGroup>
+
+                            <b:commandButton type="submit" ajax="false" value="#{msgs.cancelBtn}" action="cart" immediate="true"/>
+                            <b:commandButton type="submit" value="#{msgs.purchaseBtn}" action="#{checkout.finalizePurchase()}" update="growl"/>
+                        </b:panelGrid>
+                        <p:messages rendered="false" for="cardType" />
+                        <p:messages rendered="false" for="cardNum" />
+                        <p:messages rendered="false" for="cardName" />
+                        <p:messages rendered="false" for="cardCode" />
+                        <p:messages rendered="false" for="cardYear" />
+                    </h:form>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

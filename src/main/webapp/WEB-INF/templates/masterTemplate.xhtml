@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta name="author" content="Evangelo Glicakis, Pierre Azelart" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <h:outputStylesheet library="css" name="bootstrap.css"/>
+        <!--        <h:outputStylesheet library="css" name="menu.css"/>-->
+        <!--        <h:outputStylesheet library="css" name="mainpage.css"/>-->
+        <ui:insert name="css"/>
+        <link rel="icon" type="image/png" href="#{request.contextPath}/resources/images/favicon.png"></link>
+        <script src="https://use.fontawesome.com/b8bcb424f5.js"></script> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <title><ui:insert name="WindowTitle"></ui:insert></title>
+    </h:head>
+    <f:view locale="#{ChangeLanguage.locale}">    
+
+        <ui:insert name="menu">
+            <ui:include src="../sections/menu.xhtml" />
+        </ui:insert>
+
+        <h:body style="-webkit-font-smoothing: antialiased;">
+            <ui:insert name="page-content"/>
+        </h:body>
+        <ui:insert name="footer">
+            <ui:include src="../sections/footer.xhtml" />
+        </ui:insert>
+    </f:view>
+</html>

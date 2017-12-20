@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <f:view locale="#{ChangeLanguage.locale}">
+    <h:head>
+        <title>#{msgs.loginHeader}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="author" content="Hau Gilles Che"/>
+        <h:outputStylesheet library="css" name="bootstrap.css"/>
+        <h:outputStylesheet library="css" name="login.css"/>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <div class="panel-heading">
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <h2 style="color:white; font-weight: bold;">Pandamedia #{msgs.loginHeader}</h2>
+                </div>
+            </div>
+            <div class="panel-body">
+                <h:form id="loginForm">
+                        <div class="form-group">
+                            <h:inputText class="form-control input-sm" id="emailInput" 
+                                         value="#{userBean.shopUser.email}" 
+                                         a:placeholder="#{msgs.emailHeader}" required="true"
+                                         requiredMessage="#{msgs.requiredFieldMsg}"
+                                         validator="#{userAction.validateEmail}">
+                                <f:ajax event="valueChange" render="emailError"/>
+                            </h:inputText>
+                            <h:message id="emailError" for="emailInput" style="color:red"/>
+                        </div>
+                        <div class="form-group">
+                            <h:inputSecret class="form-control input-sm" id="passwordInput"
+                                           value="#{userBean.password}"
+                                           a:placeholder="#{msgs.passwordHeader}" required="true"
+                                           requiredMessage="#{msgs.requiredFieldMsg}"/>
+                            <h:message for="passwordInput" style="color:red"/>
+                        </div>
+                        <h:message for="loginForm" style="color:red"/>
+
+
+
+                    <h:message for="loginForm" style="color:red"/>
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-md-offset-3">
+                            <div class="form-group">
+                                <h:commandButton class="btn btn-info btn-block"
+                                                 id="loginBtn" value="#{msgs.loginHeader}"
+                                                 action="#{userAction.login()}"/>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-md-offset-3">
+                        <div class="form-group">
+                            <h:button class="btn btn-danger btn-block"
+                                      id="registerBtn" value="#{msgs.registerBtn}"
+                                      outcome="registration"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </h:body>
+    </f:view>
+</html>

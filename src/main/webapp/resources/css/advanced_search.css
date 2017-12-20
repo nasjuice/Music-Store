@@ -1,0 +1,33 @@
+body{
+    padding-top: 100px;
+    height: 100%;
+    width: 100%;
+}
+
+.search-form{
+    text-align: center;
+    border: 1px solid #17171b;
+    width: 50%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+
+}
+
+#formDates .date2{
+    float: right;
+}
+
+.title{
+    margin-top: 10%;
+    font-size: 18px;
+}
+
+.input{
+    padding-top: 10%;
+    font-size: 16px;
+}
+
+.submit-button{
+    padding-top: 10%;
+    font-size: 18px;
+}

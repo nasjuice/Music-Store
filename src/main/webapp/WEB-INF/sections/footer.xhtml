@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<ui:composition    
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <head>
+        <h:outputStylesheet library="css" name="footer.css"/>
+    </head>
+    <footer>
+        <div class="footer-wrapper">
+            <div class="container">
+                <div class="pad">
+                    <div class="footer-text-hover">
+                        <div class="row2 row">
+                            <div class="col-brand">
+                                <div class="clearfix">
+                                    <a class="footer-brand" href="#">
+                                        <img alt="footer-brand" src="#{request.contextPath}/resources/images/favicon.png"/>
+                                        <span class="brand-span">Pandamedia</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col">
+                                <h6 class="col-title">#{msgs.about}</h6>
+                                <div class="ul-container">
+                                    <ul class="nav-footer">
+                                        <li class="nav-footer-item">
+                                            <a class="nav-link" href="#">#{msgs.aboutUs}</a>
+                                        </li>
+                                        <li class="nav-footer-item">
+                                            <a class="nav-link" href="#">#{msgs.jobs}</a>
+                                        </li>
+                                        <a class="nav-link" href="#">#{msgs.policy}</a>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col">
+                                <h6 class="col-title">#{msgs.links}</h6>
+                                <div class="ul-container">
+                                    <ul class="nav-footer">
+                                        <li class="nav-footer-item">
+                                            <a class="nav-link" href="#{request.contextPath}/shop/help_page.xhtml">#{msgs.help}</a>
+                                        </li>
+                                        <li class="nav-footer-item">
+                                            <a class="nav-link" href="#">#{msgs.support}</a>
+                                        </li>
+                                        <li class="nav-footer-item">
+                                            <a class="nav-link" href="#">#{msgs.contactUs}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col">
+                                <h6 class="col-title">#{msgs.connect}</h6>
+                                <div class="ul-container">
+                                    <ul class="nav-footer">
+                                        <li class="nav-footer-item">
+                                            <a class="nav-link" href="#">#{msgs.rssFeed}</a>
+                                        </li>
+                                        <li class="nav-footer-item">
+                                            <a class="nav-link" href="#">#{msgs.twitter}</a>
+                                        </li>
+                                        <li class="nav-footer-item">
+                                            <a class="nav-link" href="#">#{msgs.googlePlus}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</ui:composition>

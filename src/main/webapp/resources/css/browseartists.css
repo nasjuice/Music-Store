@@ -1,0 +1,42 @@
+html{
+        height: 100%;
+}
+
+body{
+    background-color: #17171b;
+        height: 100%;
+}
+
+.artist-name{
+    font-family: "Segoe UI", sans-serif;
+    font-size: 16px;
+    color: white;
+    line-height: 1.5em;
+}
+
+.artist-name:hover{
+    color: #02b875;
+}
+
+.artist-header{
+    padding-top: 50px;
+    padding-left: 50px;
+}
+
+.pos-name h4{
+    font-family: "Poppins";
+    font-size: 24px!important;
+    font-weight: 700!important;
+}
+
+.pre-text{
+    font-size: 18px;
+}
+
+.browse-cont{
+    margin: 0;
+    padding: 0;
+    padding-left: 50px;
+    padding-top: 50px;
+    min-height: calc(100vh - 289px);
+}

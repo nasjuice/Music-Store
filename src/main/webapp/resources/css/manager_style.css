@@ -1,0 +1,265 @@
+html{
+    margin: 0;
+    border: 0;
+    height: 100%;
+}
+
+body{
+    font-size: 14px;
+    margin: 0;
+    display: initial;
+    min-height: 100%;
+}
+
+html, body {
+    overflow: auto;
+    height: 100%;
+}
+
+.sloganContainer > h1{
+    margin: 0;
+    font-size: 40px;
+    font-family: "Raleway", sans-serif;
+    padding-bottom: 5vh;
+    
+}
+
+.homeContent > .sloganContainer{
+    display: inline-block;
+    align-self: center;
+    color: #000;
+    border:0;
+    margin:0;
+    padding:0;
+}
+
+.homeContainer{
+    display: inline-block;
+    width: 100%;
+    /*stretching content under the navbar*/
+    position: absolute;
+    /*86px is the height of the navbar*/
+    margin-top: 86px;
+    height: auto;
+    top:0px; 
+    left:0px;
+    right:0px; 
+    bottom:0px;
+    
+    padding: 0;
+    padding-bottom: 0;
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+    background-color: #fff;
+    background-image: url("#{resource['/images/background.jpg']}");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+}
+
+.homeContent{
+    padding-top: 35vh;
+    display: flex;
+    justify-content: center;
+    
+    min-width: 100%; 
+    min-height: 100%;
+    margin: 0;
+    border: 0;
+    text-align: center;   
+}
+
+/*div containing button*/
+.accessButton{
+    margin-top: 80px;
+    width: auto;
+    
+    /*applying custom style*/
+    background-color: #fff;
+    color: #000;
+    border: none;
+    padding: 12px 40px;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 30px;
+    cursor: pointer;   
+}
+
+.accessButton:hover{
+    background-color: #303030;
+    color: #fff;    
+    transition: background-color 0.5s, color 0.5s ease-in-out;
+}
+
+
+
+.navbar-nav{
+    height: 86px;
+    display: flex;
+    align-items: center;
+}
+
+
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: #fff;
+}
+
+.navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #fff;
+}
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover {
+    color: #fff;
+    background-color: #777;
+    transition: ease-in-out 0.3s;
+}
+
+.container{
+    height: 100%;
+    min-height: 100%;
+}
+
+.navbar-toggle{
+    border: 0;
+    background-color: #303030; 
+    margin-top: 27px;
+    margin-bottom: 27px;
+}
+
+
+.navbar-header{
+  height: 100%;  
+} 
+
+.navbar-brand{
+    font-size: 24px;
+    padding-top: 30px;
+    padding-bottom: 56px;
+}
+
+.navbar-nav{
+    font-size: 16px;
+    margin: 0 -15px;
+    /*padding-top: 18px;
+    padding-bottom: 18px;*/
+}
+
+.navbar-nav .dropdown-menu{
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 16px;
+}
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    border: 0;
+}
+
+.navbar-collapse{
+    background-color: #303030;
+}
+
+.navbar-default, .dropdown-menu{
+    background-color: #303030;
+    color:#fff;
+    margin-bottom:0;
+    border-radius: 0;
+    border: 0px;
+}
+
+.navbar-brand,.dropdown-menu > li > a,
+.navbar-default .navbar-nav > li > a,
+a.navbar-brand,
+.navbar-default .navbar-brand{
+    color: #FFF; /* color of the letters on the navbar */
+    transition: ease-in-out background-color 0.3s;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-brand:hover{
+    background-color: #777;
+    color:#fff;
+}
+
+.navbar-default .navbar-nav > li > a:visited,
+.navbar-default .navbar-brand:visited,
+.dropdown-menu > li > a:visited{
+    background-color: #777;
+    color:#fff;
+}
+
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus{
+    background-color: #303030;
+    color:#fff;
+}
+
+.navbar-default .navbar-toggle:focus{
+    outline: none;
+    background-color: #303030;
+    transition: background-color 0.3s;
+}
+
+.navbar-default .navbar-toggle .icon-bar{
+    background-color: #fff;
+}
+.navbar-default .navbar-toggle:hover .icon-bar{
+    background-color: #777;
+    transition: background-color 0.3s;
+}
+
+.page-heading {position: relative;padding: 60px 15px;color: rgba(255, 255, 255, 0.7);margin-bottom: 0;font-size: 20px;;background-color: rgba(0,0,0,0.8);}
+.page-heading h1 { margin-top: 0; color: white; }
+.page-heading p { margin-bottom: 0; line-height: 1.4; }
+.page-heading .container { position: relative; }
+
+.fileupload-buttonbar {
+    background: transparent none;
+    border: none;
+}
+
+about-heading{
+    height:100%;
+    position: relative;
+    padding: 60px 15px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0;
+    font-size: 20px;
+    background-color: rgba(0,0,0,0.8);
+}
+
+
+.fileupload-content {
+    display: none;
+}
+
+.ui-fileupload .fileinput-button {
+    background-color: rgba(142, 103, 64, 0.98);
+}
+
+.main_title{
+    border-bottom: 3px solid #fc4e1b;
+    display:inline-block;
+    padding-left: 5px;
+    padding-right:5px;
+    margin-bottom: 10px;
+    transition: padding-right 1s;
+}
+
+.main_title:hover{
+    padding-right: 15px;
+}
+.ui-fileupload-content{
+    min-height: 100px;
+}
+
+.ui-panel .ui-panel-content{
+    min-height:95px;
+}
+.bullets{
+    color:#222;
+    font-size: 27px;
+    text-decoration: underline;
+
+}
